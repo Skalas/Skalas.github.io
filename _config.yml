@@ -14,8 +14,8 @@ color:
 
 # Team names, titles and social links
 people:
-- name: Kay Garland
-  pic: 1
+- name: Miguel Escalante
+  pic: #
   position: Data Engineer
   social:
     - title: twitter
