@@ -1,44 +1,17 @@
-url: https://Skalas.github.io
-baseurl: 
-
 # Site settings
-title: Salaks
-email: miguel@opi.la
-description: "A Page for you to know me, with some rants about config, devOps, DataScience, DataEngineering, etc."
-
-# Color settings (hex-codes without the leading hash-tag)
-color:
-  primary: fed136
-  secondary: fec503  
-  secondary-dark: 333
-
-# Team names, titles and social links
-people:
-- name: Miguel Escalante
-  pic: #
-  position: Data Engineer
-  social:
-    - title: twitter
-      url: # 
-    - title: facebook
-      url: #
-    - title: stack-overflow
-      url: #
-
-# Social networks usernames (many more available: google-plus, flickr, dribbble, pinterest, instagram, tumblr, linkedin, etc.)
-social:
-  - title: twitter
-    url: http://twitter.com/skalas
-  - title: github
-    url: http://github.com/Skalas
-  - title: facebook
-    url: http://facebook.com/skalas
-
-# Postal address (add as many lines as necessary)
-address:
-  - line: 3481 Melrose 
-  - line: Beverly Hills, CA 90210
+title: Clean Blog
+header-img: img/home-bg.jpg
+email: your-email@yourdomain.com
+description: "Write your site description here. It will be used as your sites meta description as well!"
+baseurl: ""
+url: "http://Skalas.github.io"
+twitter_username: SBootstrap
+github_username:  davidtmiller
+facebook_username:  IronSummitMedia
 
 # Build settings
 markdown: kramdown
+highlighter: pygments
 permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
