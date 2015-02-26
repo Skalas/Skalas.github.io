@@ -1,0 +1,3 @@
+[submodule "jekyll-xckd-embed"]
+	path = jekyll-xckd-embed
+	url = https://github.com/nubisonline/jekyll-xckd-embed.git
