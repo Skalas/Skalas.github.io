@@ -1,0 +1,3 @@
+[submodule "emacs-dx"]
+	path = emacs-dx
+	url = git@github.com:Skalas/emacs-dx.git
