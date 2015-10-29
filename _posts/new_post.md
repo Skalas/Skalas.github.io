@@ -10,3 +10,5 @@ permalink: emacs-4-dummies
 comments: True
 author: Miguel Escalante
 ---
+
+Talk about automated drivers and the ethic problem
