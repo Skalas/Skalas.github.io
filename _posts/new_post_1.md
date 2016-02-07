@@ -15,12 +15,40 @@ If you are working with data, chances are that you need to do a certain set of t
 
 Cron is a tool for Unix-like operative systems that automatically triggers processes at a given time frame. It uses jobs that each user installs individually and then deppending on the times set, it will run them accordingly.
 
-
-* * * * * whoami > /tmp/weeeee.log
-
-
-In order to use it you only need the script or the command you want to run. For the first example I had a question regarding cron:
+I had a question regarding cron:
 
 Q: If its automatic then who runs it? 
 A: The user that installed the cronjob. 
 
+So this is where my first example derives, in order to answer the question I made a cronjob that would log into a file the username of the cronjob "runner". To install such cronjob you just have to run:
+
+	crontab -e
+
+The first time it might ask you what text editor you want to set as default, nano is usually the simplest choice; so just type the number for your desired editor and press enter. Now you will be promted with the chosen editor and the following text is by deffault there:
+
+    # Edit this file to introduce tasks to be run by cron.
+    #
+    # Each task to run has to be defined through a single line
+    # indicating with different fields when the task will be run
+    # and what command to run for the task
+    #
+    # To define the time you can provide concrete values for
+    # minute (m), hour (h), day of month (dom), month (mon),
+    # and day of week (dow) or use '*' in these fields (for 'any').
+    # Notice that tasks will be started based on the cron's system
+    # daemon's notion of time and timezones.
+    #
+    # Output of the crontab jobs (including errors) is sent through
+    # email to the user the crontab file belongs to (unless redirected).
+    #
+    # For example, you can run a backup of all your user accounts
+    # at 5 a.m every week with:
+    # 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+    #
+    # For more information see the manual pages of crontab(5) and cron(8)
+    #
+    # m h  dom mon dow   command
+
+Notice that the whole file right now is just comments, nothing actionable yet; but we can read a very useful introduction on to how to use cron.
+
+	* * * * * whoami > /tmp/weeeee.log
