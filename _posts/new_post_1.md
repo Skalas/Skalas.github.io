@@ -6,7 +6,7 @@ category: Automating
 header-img: "img/post-bg-02.jpg"
 tags: [ubuntu, automation, cron]
 date: 2016-02-06 12:00:00
-permalink: related
+permalink: cron
 comments: True
 author: Miguel Escalante
 ---
@@ -49,6 +49,10 @@ The first time it might ask you what text editor you want to set as default, nan
     #
     # m h  dom mon dow   command
 
-Notice that the whole file right now is just comments, nothing actionable yet; but we can read a very useful introduction on to how to use cron.
+Notice that the whole file right now is just comments, nothing actionable yet; but we can read a very useful introduction on to how to use cron. In order to install a cron we just have to add a new line to the file we are edditing, the line has five slots to indicate minute, hour, day of the month and month.
+
+The following line adds a cron that will run every minute, it's a simple command that outputs the user name (`whoami`) to the file `/tmp/weeeee.log`.
 
 	* * * * * whoami > /tmp/weeeee.log
+
+In the folder `/tmp/` every user has permision to write, so that's why I usually use that folder to write the output of scripts. The silly name helps the future me knowing that it the file with the silly name can be safely removed. 
