@@ -4,7 +4,7 @@ header-img: img/home-bg.jpg
 email: escalas5@gmail.com
 description: "Miguel Escalante, mathematician, developer, data scientist, data engineer, whovian."
 baseurl: ""
-url: "http://Skalas.github.io"
+url: "https://skalas.me"
 twitter_username: Skalas
 github_username:  Skalas
 facebook_username:  Skalas
@@ -21,6 +21,42 @@ exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 gems:	 
   - jekyll-redirect-from
   - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
 plugins:
   - jekyll-paginate
   - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# SEO settings
+author:
+  name: Miguel Escalante
+  email: escalas5@gmail.com
+  bio: "Data Scientist, Mathematician, Developer"
+  location: "Mexico City, Mexico"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/Skalas"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/skalas"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter"
+      url: "https://twitter.com/Skalas"
+
+# Social media
+social_media:
+  - name: GitHub
+    url: https://github.com/Skalas
+  - name: LinkedIn
+    url: https://linkedin.com/in/skalas
+  - name: Twitter
+    url: https://twitter.com/Skalas
+
+# Feed settings
+feed:
+  path: feed.xml
