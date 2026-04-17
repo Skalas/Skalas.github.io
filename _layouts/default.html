@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
-
+<html lang="{{ site.lang | default: 'en' }}">
 {% include head.html %}
 
 <body>
@@ -12,8 +9,8 @@
     {{ content }}
 
     {% include footer.html %}
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 
 </body>
-
 </html>

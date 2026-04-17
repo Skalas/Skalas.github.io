@@ -4,6 +4,7 @@ title: "My Data Science Journey: From Police Analytics to AI Leadership"
 description: "Reflecting on 8+ years of data science work, from crime prediction to AI-powered media analytics"
 category: Data Science
 header-img: "img/post-bg-02.jpg"
+image: /img/post-bg-02.jpg
 tags: [data-science, machine-learning, career, analytics, AI]
 date: 2024-12-19 12:00:00
 permalink: data-science-journey-2024

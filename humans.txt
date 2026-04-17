@@ -1,0 +1,19 @@
+---
+layout: null
+permalink: /humans.txt
+sitemap: false
+---
+/* TEAM */
+Name: {{ site.author.name }}
+Role: Data Scientist, Mathematician, Developer
+Site: {{ site.url }}
+Twitter: @{{ site.twitter_username }}
+GitHub: @{{ site.github_username }}
+Location: {{ site.author.location }}
+
+/* SITE */
+Last update: {{ site.time | date: "%Y-%m-%d" }}
+Language: English
+Doctype: HTML5
+Generator: Jekyll
+Source: https://github.com/{{ site.github_username }}/{{ site.github_username }}.github.io
