@@ -1,0 +1,46 @@
+---
+import { NAV, SITE } from '../consts';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="sticky top-0 z-40 border-b border-[color:var(--border)] bg-[color:var(--bg)]/85 backdrop-blur">
+  <nav
+    aria-label="Primary"
+    class="container-wide flex h-16 items-center justify-between"
+  >
+    <a
+      href="/"
+      class="font-serif text-lg font-semibold tracking-tight no-underline"
+      aria-label={`${SITE.title} — home`}
+    >
+      {SITE.title}
+    </a>
+
+    <ul class="flex items-center gap-6 text-sm">
+      {
+        NAV.map(({ href, label }) => {
+          const normalized = href.replace(/\/$/, '') || '/';
+          const isActive =
+            normalized === '/' ? path === '/' : path === normalized;
+          return (
+            <li>
+              <a
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                class:list={[
+                  'no-underline',
+                  isActive
+                    ? 'font-medium text-[color:var(--text)]'
+                    : 'text-[color:var(--text-muted)] hover:text-[color:var(--text)]',
+                ]}
+              >
+                {label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+</header>

@@ -5,4 +5,9 @@ node_modules
 .jekyll-metadata
 .bundle
 vendor
+dist
+.astro
+.env
+.env.production
+.DS_Store
 **/*~

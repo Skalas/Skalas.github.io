@@ -1,0 +1,139 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE } from '../consts';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  updated?: Date;
+  author?: string;
+  category?: string;
+  tags?: string[];
+  hero?: ImageMetadata;
+  heroAlt?: string;
+  image?: string;
+  imageAlt?: string;
+  mathjax?: boolean;
+  prev?: { slug: string; title: string } | null;
+  next?: { slug: string; title: string } | null;
+}
+
+const {
+  title,
+  description,
+  date,
+  updated,
+  author = SITE.author.name,
+  category,
+  tags = [],
+  hero,
+  heroAlt,
+  image,
+  imageAlt,
+  mathjax,
+  prev,
+  next,
+} = Astro.props;
+
+const readingMeta = [
+  category,
+  date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+]
+  .filter(Boolean)
+  .join(' · ');
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt ?? heroAlt ?? title}
+  type="article"
+  publishedAt={date}
+  updatedAt={updated}
+  mathjax={mathjax}
+>
+  {hero && <Hero title={title} subtitle={description} meta={readingMeta} image={hero} imageAlt={heroAlt ?? ''} />}
+
+  {!hero && (
+    <header class="border-b border-[color:var(--border)] py-16">
+      <div class="container-prose">
+        <p class="mb-4 font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
+          {readingMeta}
+        </p>
+        <h1 class="font-serif text-4xl font-semibold leading-tight md:text-5xl">{title}</h1>
+        {description && (
+          <p class="mt-4 text-lg text-[color:var(--text-muted)]">{description}</p>
+        )}
+      </div>
+    </header>
+  )}
+
+  <article class="container-prose py-16">
+    <div class="mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-[color:var(--text-muted)]">
+      <span>By {author}</span>
+      <span aria-hidden="true">·</span>
+      <FormattedDate date={date} />
+      {updated && (
+        <>
+          <span aria-hidden="true">·</span>
+          <span>Updated <FormattedDate date={updated} /></span>
+        </>
+      )}
+    </div>
+
+    <div
+      class="prose prose-lg max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-a:text-[color:var(--link)] prose-code:rounded prose-code:bg-[color:var(--border)] prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:before:content-none prose-code:after:content-none dark:prose-invert"
+    >
+      <slot />
+    </div>
+
+    {tags.length > 0 && (
+      <ul class="mt-12 flex flex-wrap gap-2 text-xs" aria-label="Tags">
+        {tags.map((t) => (
+          <li class="rounded-full border border-[color:var(--border)] px-3 py-1 text-[color:var(--text-muted)]">
+            #{t}
+          </li>
+        ))}
+      </ul>
+    )}
+  </article>
+
+  {(prev || next) && (
+    <nav
+      aria-label="Post navigation"
+      class="container-prose border-t border-[color:var(--border)] py-8"
+    >
+      <ul class="flex flex-col justify-between gap-4 sm:flex-row">
+        {prev && (
+          <li class="flex-1">
+            <a href={`/${prev.slug}`} class="block no-underline group">
+              <span class="block text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
+                ← Previous
+              </span>
+              <span class="mt-1 block font-serif text-lg group-hover:text-[color:var(--link)]">
+                {prev.title}
+              </span>
+            </a>
+          </li>
+        )}
+        {next && (
+          <li class="flex-1 sm:text-right">
+            <a href={`/${next.slug}`} class="block no-underline group">
+              <span class="block text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
+                Next →
+              </span>
+              <span class="mt-1 block font-serif text-lg group-hover:text-[color:var(--link)]">
+                {next.title}
+              </span>
+            </a>
+          </li>
+        )}
+      </ul>
+    </nav>
+  )}
+</BaseLayout>

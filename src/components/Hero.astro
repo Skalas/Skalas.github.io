@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  meta?: string;
+  image: ImageMetadata;
+  imageAlt?: string;
+  compact?: boolean;
+}
+
+const { title, subtitle, meta, image, imageAlt = '', compact = false } = Astro.props;
+---
+
+<header
+  class:list={[
+    'relative isolate overflow-hidden text-white',
+    compact ? 'min-h-[38vh]' : 'min-h-[58vh] md:min-h-[62vh]',
+  ]}
+>
+  <Image
+    src={image}
+    alt={imageAlt}
+    widths={[640, 960, 1280, 1600, 1900]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    decoding="async"
+    class="absolute inset-0 -z-10 size-full object-cover"
+  />
+  <div
+    class="absolute inset-0 -z-10"
+    style="background: linear-gradient(180deg, var(--hero-overlay), rgba(0,0,0,0.55));"
+  >
+  </div>
+
+  <div class="container-wide flex h-full flex-col justify-end py-16 md:py-24">
+    {meta && <p class="mb-4 font-sans text-xs uppercase tracking-[0.2em] text-white/75">{meta}</p>}
+    <h1 class="font-serif text-4xl font-semibold leading-tight md:text-6xl md:leading-[1.05]">
+      {title}
+    </h1>
+    {subtitle && (
+      <p class="mt-5 max-w-2xl font-serif text-lg text-white/90 md:text-xl">
+        {subtitle}
+      </p>
+    )}
+  </div>
+</header>
