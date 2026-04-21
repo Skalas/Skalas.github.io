@@ -1,0 +1,84 @@
+---
+title: "Chronos, Cron."
+description: "A pragmatic intro to cron for automating periodic data tasks on Ubuntu."
+date: 2016-04-11
+category: Automating
+tags: [ubuntu, automation, cron]
+hero: ../../assets/heroes/post-bg-02.jpg
+heroAlt: "Clock face abstract"
+---
+
+If you are working with data, chances are you need to do a certain set of tasks periodically — whether it's your daily report or a daily cleaning of the incoming database, you don't have to waste time running them every day. The procedure I'm about to describe is very rudimentary; there are more complex tools, but in my opinion those tools are overkill for this.
+
+Cron is a tool included in Unix-like operating systems that automatically triggers processes at a given time or interval. It uses jobs that each user installs individually and then runs according to the times set.
+
+I had a question regarding cron:
+
+- **Q:** If it's automatic then who runs it?
+- **A:** The user that installed the cronjob.
+
+So this is where my first example derives from — to answer the question I made a cronjob that would log the username of the cron "runner" into a file. To install such a cronjob you just have to run:
+
+```bash
+crontab -e
+```
+
+The first time it might ask what text editor you want to use — nano is usually the simplest choice. You'll then be prompted with the chosen editor and the following text by default:
+
+```text
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# m h  dom mon dow   command
+```
+
+The whole file right now is just comments — nothing actionable yet, but a useful intro on how to use cron. To install a cron we just add a new line; the line has five time slots: minute, hour, day of month, month, and day of week.
+
+The following line adds a cron that will run every minute. It's a simple command that outputs the username (`whoami`) to `/tmp/weeeee.log`:
+
+```cron
+* * * * * whoami > /tmp/weeeee.log
+```
+
+In `/tmp/` every user has permission to write, so I usually use that folder for scratch output. The silly name helps future-me remember the file can be safely removed.
+
+After the next minute tick, the new file appears. `cat` it:
+
+```text
+skalas@hostname:~
+> cat /tmp/weeeee.log
+skalas
+```
+
+So the user running the cronjob is the user that ran `crontab`. What happens when we use sudo?
+
+```bash
+sudo crontab -e
+```
+
+Add the same line:
+
+```cron
+* * * * * whoami > /tmp/weeeee.log
+```
+
+Check the file:
+
+```text
+skalas@felurian:~
+> sudo cat /tmp/weeeee.log
+root
+```
+
+So we know who runs the commands based on how the crontab was installed. Hopefully this serves as an introduction on how to make your first cron jobs. Continue by reading the notes inside `crontab -e`, the manual, and thinking about what other jobs you'd like to automate.

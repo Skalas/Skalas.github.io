@@ -1,53 +1,70 @@
-# WhatATheme
-**WhatATheme** is a customizable Jekyll Portfolio theme which supports blogging. You can use this theme in order to create an elegant, fully responsive portfolio.
+# skalas.me
 
-#### You can checkout the [**Demo Here**](https://thedevslot.github.io/WhatATheme/) :boom:
+Personal site and blog of [Miguel Escalante](https://skalas.me) — data scientist, mathematician, and developer in Mexico City.
 
-![WhatATheme](assets/images/meta.jpg)
+Built with [Astro](https://astro.build) + Tailwind CSS + MDX. Deployed to GitHub Pages.
 
-# Features :sparkles:
-* Free and Easy setup
-* No Coding Required
-* Compatible with [Github Pages](https://pages.github.com/)
-* Responsive and Blogging Ready
-* HTML Compressor using [Jekyll Compress HTML](https://jch.penibelst.de/)
-* Minified CSS using SaSS
-* CMS Admin Support using [Jekyll Admin](https://jekyll.github.io/jekyll-admin/)
-* Supports Latest [Jekyll 4.x](https://jekyllrb.com/) and [Bundler](https://bundler.io/)
-* Stylesheet built using SaSS
-* Comments using Disqus
-* Analytics using Google Analytics
-* Instant Search using [Simple Jekyll Search](https://github.com/christian-fei/Simple-Jekyll-Search/)
+## Develop
 
-# Installation :books:
-### System Requirements
-* [Ruby](https://www.ruby-lang.org/en/)
-* [Jekyll](https://jekyllrb.com/)
-> You can read **What is Jekyll** [**here**](https://thedevslot.github.io/WhatATheme/blog/what-is-jekyll-how-to-use-it)
-### Up and Running
-* Fork the [Repository](https://github.com/thedevslot/WhatATheme/)
-* Clone or download the repository into directory of your choice: `git clone https://github.com/thedevslot/WhatATheme.git`
-* Inside the directory run `bundle install`
-* Host WhatATheme locally by running `bundle exec jekyll s`
+```bash
+npm install
+npm run dev
+```
 
-> You can read **How to Install and use WhatATheme?** [**here**](https://thedevslot.github.io/WhatATheme/blog/how-to-install-whatatheme)
+Dev server at http://127.0.0.1:4321.
 
-[<img src="https://i.imgur.com/TVI946Z.png" width="250" />](https://youtu.be/VfPa2c9kwhQ)
+## Build
 
+```bash
+npm run build     # outputs to dist/
+npm run preview   # serves dist/ locally
+```
+
+## Write a post
+
+Create an MDX file in `src/content/posts/`. The filename becomes the URL slug (e.g. `my-post.mdx` → `/my-post`).
+
+```mdx
+---
+title: "My post title"
+description: "One-line summary used for SEO and post listing."
+date: 2026-01-15
+category: Data Science
+tags: [machine-learning, python]
+hero: ../../assets/heroes/post-bg-02.jpg
+heroAlt: "Description of the image"
+# optional:
+# updated: 2026-02-01
+# mathjax: true            # load MathJax on this post only
+# redirectFrom: [/old-url] # add a 301 redirect
 ---
 
-### Content Credits :green_heart:
-* [Hero Image](https://images.pexels.com/photos/220444/pexels-photo-220444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) used as a background image in the very first section of Homepage.
-* [Author Image](https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png) used in the Author Section.
-* [Font Awesome](https://fontawesome.com/)
-* [Poppins Font](https://fonts.google.com/specimen/Poppins)
-* [Memphis Pattern](https://www.freepik.com/free-vector/memphis-pattern-background_4034913.htm#page=1&query=memphis%20pattern&position=23) used for some Social Media Images and the Favicon.
+Post content goes here.
+```
 
----
+## Structure
 
-### Credits :bulb:
-* [Sneha Omer](http://sassyecoder.github.io/)
-* [Harsh Trivedi](http://harsh98trivedi.github.io/)
+```
+src/
+├── assets/heroes/    # source images (Astro optimizes them)
+├── components/       # Astro components (Nav, Footer, Hero, SEO…)
+├── content/posts/    # MDX posts (content collection)
+├── layouts/          # BaseLayout, PageLayout, PostLayout
+├── pages/            # File-based routes + API endpoints
+├── styles/           # global.css (Tailwind + design tokens)
+├── consts.ts         # site-wide constants
+└── content.config.ts # content collection schema
 
-### License
-The contents of this repository are licensed under the [**GNU General Public License v2.0**](https://github.com/thedevslot/WhatATheme/blob/master/LICENSE)
+public/               # copied verbatim to dist (CNAME, favicon)
+.github/workflows/    # GitHub Pages deploy workflow
+```
+
+## Deploy
+
+Push to `main`. The workflow in `.github/workflows/deploy.yml` builds Astro and deploys to Pages.
+
+One-time GitHub setup: repository **Settings → Pages → Source = "GitHub Actions"**.
+
+## License
+
+[MIT](LICENSE)

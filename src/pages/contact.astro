@@ -1,0 +1,46 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import contactBg from '../assets/heroes/contact-bg.jpg';
+import { SITE, SOCIAL_LINKS } from '../consts';
+
+const mailto = `mailto:${SITE.author.email}?subject=${encodeURIComponent('Hello from skalas.me')}`;
+---
+
+<PageLayout
+  title="Contact"
+  description="Get in touch with Miguel Escalante."
+  hero={contactBg}
+  heroAlt="Abstract cityscape"
+  image={contactBg.src}
+>
+  <p>
+    The fastest way to reach me is email. I read everything, and I reply to most things — though sometimes
+    slowly.
+  </p>
+
+  <p class="not-prose my-10">
+    <a
+      href={mailto}
+      class="inline-flex items-center gap-3 rounded-md border border-[color:var(--border)] bg-[color:var(--link)] px-6 py-4 font-sans text-base font-medium text-white no-underline transition-colors hover:bg-[color:var(--link-hover)]"
+    >
+      <span aria-hidden="true">✉</span>
+      <span>{SITE.author.email}</span>
+    </a>
+  </p>
+
+  <p>Or find me on any of these:</p>
+
+  <ul>
+    {
+      SOCIAL_LINKS.map(({ label, href, rel }) => (
+        <li>
+          <a href={href} rel={rel}>{label}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="text-sm text-[color:var(--text-muted)]">
+    Based in {SITE.author.location}. Timezone: {SITE.timezone}.
+  </p>
+</PageLayout>

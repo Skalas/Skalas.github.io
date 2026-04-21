@@ -1,0 +1,42 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  hero?: ImageMetadata;
+  heroAlt?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, description, hero, heroAlt, image, imageAlt } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt ?? heroAlt ?? title}
+>
+  {hero ? (
+    <Hero title={title} subtitle={description} image={hero} imageAlt={heroAlt ?? ''} compact />
+  ) : (
+    <header class="border-b border-[color:var(--border)] py-16">
+      <div class="container-wide">
+        <h1 class="font-serif text-4xl font-semibold md:text-5xl">{title}</h1>
+        {description && (
+          <p class="mt-4 max-w-2xl text-lg text-[color:var(--text-muted)]">{description}</p>
+        )}
+      </div>
+    </header>
+  )}
+
+  <article class="container-prose prose-editorial py-16">
+    <div class="prose prose-lg max-w-none dark:prose-invert prose-headings:font-sans prose-a:text-[color:var(--link)]">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
