@@ -12,6 +12,15 @@ export default defineConfig({
       filter: (page) => !page.includes('/404'),
     }),
   ],
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+      wrap: false,
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

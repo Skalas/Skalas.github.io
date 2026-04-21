@@ -135,3 +135,35 @@
     border-top: 1px solid var(--border);
   }
 }
+
+@layer utilities {
+  .prose pre {
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+  .prose pre code {
+    background: transparent !important;
+    padding: 0 !important;
+    color: inherit !important;
+    font-size: inherit !important;
+    border-radius: 0 !important;
+  }
+  .prose pre code::before,
+  .prose pre code::after {
+    content: none !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .astro-code,
+    .astro-code span {
+      color: var(--shiki-dark) !important;
+      background-color: var(--shiki-dark-bg) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+}
