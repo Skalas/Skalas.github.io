@@ -57,7 +57,16 @@ const readingMeta = [
   updatedAt={updated}
   mathjax={mathjax}
 >
-  {hero && <Hero title={title} subtitle={description} meta={readingMeta} image={hero} imageAlt={heroAlt ?? ''} />}
+  {hero && (
+    <Hero
+      size="post"
+      eyebrow={readingMeta}
+      title={title}
+      subtitle={description}
+      image={hero}
+      imageAlt={heroAlt ?? ''}
+    />
+  )}
 
   {!hero && (
     <header class="border-b border-[color:var(--border)] py-16">
