@@ -55,6 +55,15 @@ const props = Astro.props;
     )}
 
     <slot name="head" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-525117087"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-525117087');
+    </script>
   </head>
 
   <body class="min-h-dvh font-sans antialiased">
