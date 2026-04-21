@@ -22,7 +22,7 @@ const { title, description, hero, heroAlt, image, imageAlt } = Astro.props;
   imageAlt={imageAlt ?? heroAlt ?? title}
 >
   {hero ? (
-    <Hero title={title} subtitle={description} image={hero} imageAlt={heroAlt ?? ''} compact />
+    <Hero size="page" title={title} subtitle={description} image={hero} imageAlt={heroAlt ?? ''} />
   ) : (
     <header class="border-b border-[color:var(--border)] py-16">
       <div class="container-wide">
