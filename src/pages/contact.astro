@@ -1,46 +1,89 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import contactBg from '../assets/heroes/contact-bg.jpg';
 import { SITE, SOCIAL_LINKS } from '../consts';
 
 const mailto = `mailto:${SITE.author.email}?subject=${encodeURIComponent('Hello from skalas.me')}`;
 ---
 
-<PageLayout
+<BaseLayout
   title="Contact"
   description="Get in touch with Miguel Escalante."
-  hero={contactBg}
-  heroAlt="Abstract cityscape"
   image={contactBg.src}
+  imageWidth={contactBg.width}
+  imageHeight={contactBg.height}
+  imageAlt="Abstract cityscape"
 >
-  <p>
-    The fastest way to reach me is email. I read everything, and I reply to most things — though sometimes
-    slowly.
-  </p>
+  <Hero
+    size="page"
+    title="Contact"
+    image={contactBg}
+    imageAlt="Abstract cityscape"
+  />
 
-  <p class="not-prose my-10">
-    <a
-      href={mailto}
-      class="inline-flex items-center gap-3 rounded-md border border-[color:var(--border)] bg-[color:var(--link)] px-6 py-4 font-sans text-base font-medium text-white no-underline transition-colors hover:bg-[color:var(--link-hover)]"
-    >
-      <span aria-hidden="true">✉</span>
-      <span>{SITE.author.email}</span>
-    </a>
-  </p>
+  <div class="container-prose py-16">
 
-  <p>Or find me on any of these:</p>
+    <section class="mb-14">
+      <p class="font-serif text-xl leading-relaxed">
+        Email is fastest. I read everything, and I reply to most things — though sometimes slowly.
+      </p>
 
-  <ul>
-    {
-      SOCIAL_LINKS.map(({ label, href, rel }) => (
-        <li>
-          <a href={href} rel={rel}>{label}</a>
-        </li>
-      ))
-    }
-  </ul>
+      <a
+        href={mailto}
+        class="group mt-10 inline-flex items-center gap-3 no-underline"
+        aria-label={`Send email to ${SITE.author.email}`}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="size-6 shrink-0 text-[color:var(--text-muted)] transition-colors duration-200 group-hover:text-[color:var(--link)]"
+          aria-hidden="true"
+        >
+          <rect width="20" height="16" x="2" y="4" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        <span class="font-serif text-2xl font-semibold transition-colors duration-200 group-hover:text-[color:var(--link)] md:text-3xl">
+          {SITE.author.email}
+        </span>
+        <span
+          aria-hidden="true"
+          class="-translate-x-1 opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+        >→</span>
+      </a>
+    </section>
 
-  <p class="text-sm text-[color:var(--text-muted)]">
-    Based in {SITE.author.location}. Timezone: {SITE.timezone}.
-  </p>
-</PageLayout>
+    <section class="border-t border-[color:var(--border)] pt-12">
+      <p class="mb-6 font-sans text-sm uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
+        Elsewhere
+      </p>
+      <ul class="flex flex-wrap gap-3" role="list">
+        {
+          SOCIAL_LINKS.map(({ label, href, rel }) => (
+            <li>
+              <a
+                href={href}
+                rel={rel}
+                class="inline-block rounded-full border border-[color:var(--border)] px-4 py-2 font-sans text-sm no-underline text-[color:var(--text-muted)] transition-colors duration-200 hover:border-[color:var(--link)] hover:text-[color:var(--link)]"
+              >
+                {label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mt-12 border-t border-[color:var(--border)] pt-8">
+      <p class="font-sans text-sm text-[color:var(--text-muted)]">
+        {SITE.author.location}.
+      </p>
+    </section>
+
+  </div>
+</BaseLayout>

@@ -7,7 +7,7 @@ export const SITE = {
   author: {
     name: 'Miguel Escalante',
     email: 'escalas5@gmail.com',
-    location: 'Mexico City, Mexico',
+    location: 'San Salvador, El Salvador',
     twitter: 'Skalas',
     github: 'Skalas',
     linkedin: 'skalas',

@@ -35,7 +35,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
       </h2>
       <a
         href="/feed.xml"
-        class="text-sm no-underline text-[color:var(--text-muted)] hover:text-[color:var(--link)]"
+        class="rounded-full border border-[color:var(--border)] px-3 py-1 text-xs no-underline text-[color:var(--text-muted)] transition-colors duration-200 hover:border-[color:var(--link)] hover:text-[color:var(--link)]"
       >
         RSS
       </a>
@@ -43,16 +43,24 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 
     <ol class="space-y-12">
       {
-        posts.map((post) => (
-          <li>
+        posts.map((post, index) => (
+          <li
+            class="fade-up-item"
+            style={`transition-delay: ${index * 70}ms`}
+            data-animate
+          >
             <article class="group grid gap-2 md:grid-cols-[10rem_1fr]">
               <div class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)] md:pt-2">
                 <FormattedDate date={post.data.date} />
               </div>
               <div>
                 <a href={`/${post.id}`} class="no-underline">
-                  <h3 class="font-serif text-2xl font-semibold leading-tight transition-colors group-hover:text-[color:var(--link)] md:text-3xl">
+                  <h3 class="font-serif text-2xl font-semibold leading-tight text-[color:var(--text)] transition-colors duration-200 group-hover:text-[color:var(--link)] md:text-3xl">
                     {post.data.title}
+                    <span
+                      aria-hidden="true"
+                      class="ml-1.5 inline-block -translate-x-1 opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100"
+                    >→</span>
                   </h3>
                 </a>
                 {post.data.description && (
@@ -61,8 +69,8 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
                   </p>
                 )}
                 {post.data.category && (
-                  <p class="mt-3 text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
-                    {post.data.category}
+                  <p class="mt-3">
+                    <span class="category-pill">{post.data.category}</span>
                   </p>
                 )}
               </div>
@@ -73,3 +81,30 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
     </ol>
   </section>
 </BaseLayout>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>('[data-animate]');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
+  );
+
+  items.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      el.style.transitionDuration = '0s';
+      el.classList.add('is-visible');
+      requestAnimationFrame(() => el.style.removeProperty('transition-duration'));
+    } else {
+      observer.observe(el);
+    }
+  });
+</script>
