@@ -1,59 +1,187 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import aboutBg from '../assets/heroes/about-bg.jpg';
 ---
 
-<PageLayout
+<BaseLayout
   title="About"
-  description="Miguel Escalante — data scientist, mathematician, and developer based in Mexico City."
-  hero={aboutBg}
-  heroAlt="Abstract mountain landscape"
+  description="Miguel Escalante — data scientist, AI consultant, and engineer based in San Salvador."
   image={aboutBg.src}
+  imageWidth={aboutBg.width}
+  imageHeight={aboutBg.height}
+  imageAlt="Abstract mountain landscape"
 >
-  <p>
-    Miguel is a Mexican data scientist. Since the beginning of his career — working for the police force in Mexico
-    City — data analysis has been his day job, guiding him to discover useful information, suggest conclusions, and
-    support decision-making.
-  </p>
+  <Hero
+    size="page"
+    title="About"
+    image={aboutBg}
+    imageAlt="Abstract mountain landscape"
+  />
 
-  <p>
-    He holds a BS in Applied Mathematics and an MSc in Data Science, both from ITAM, one of Mexico's top think
-    tanks and higher education institutions. At ITAM, Miguel developed a genuine interest in applying
-    mathematical methods to the dynamic complexity of socioeconomic phenomena. Over the past several years, he
-    has worked with both private and public institutions with one clear objective: designing data-driven
-    solutions that improve decision-making processes constantly challenged by lack of information.
-  </p>
+  <div class="container-prose py-16">
 
-  <p>
-    At the Center of Attention to Emergencies and Citizen Protection of Mexico City, Miguel applied his data
-    skills to increase the efficiency of crime prediction, evaluate police officers on a weekly basis, and
-    design solutions to improve their performance. He also helped design the structure that handled the entire
-    analysis pipeline assembling the predictions and the evaluations.
-  </p>
+    <section class="mb-14">
+      <p class="font-serif text-xl leading-relaxed">
+        I'm a data scientist and engineer. The work started in 2010 — crime prediction models
+        for the Mexico City police, everything running through Excel macros and Matlab — and
+        has gone through government, startups, consulting, and public-sector AI since then.
+        The common thread is building things that ship and getting organizations to act on
+        what the data says. Currently leading AI strategy for the Government of El Salvador,
+        based in San Salvador.
+      </p>
+      <p class="mt-4 font-serif text-lg leading-relaxed text-[color:var(--text-muted)]">
+        Applied Mathematics undergrad, Data Science M.Sc. — both at ITAM in Mexico City.
+        I taught there for four years while working full-time.
+        The career posts cover the longer version.
+      </p>
+    </section>
 
-  <p>
-    His experience with Mexico City's government led him to OPI Analytics, where he designed and managed the
-    infrastructure for the whole company — AWS, Docker, R, Ruby and Python — and helped develop data pipelines
-    for a wide variety of public databases. After that, he consulted with Globant for a large textile company,
-    helping optimize how clothes were shipped to stores via optimal decision-making.
-  </p>
+    <section>
+      <h2 class="mb-8 font-sans text-sm uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
+        Career
+      </h2>
 
-  <p>
-    Miguel was later Data Science Manager at Cultura Colectiva, a Mexican startup focused on understanding the
-    best way to communicate with people. With data analytics and artificial intelligence, Cultura Colectiva
-    became one of the most valued media companies in Latin America. Miguel built the first version of the
-    startup's AI tooling and grew it into something more powerful and diverse.
-  </p>
+      <div class="timeline">
 
-  <p>
-    Miguel also applied these skills during <b>#Verificado19S</b>, a digital platform that verified and organized
-    information to create a more efficient response for citizens after the September 19th earthquake in Mexico.
-    Miguel coordinated the technological and data side of the effort — work that made a significant impact on
-    how people saw both millennials and social networks.
-  </p>
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2024 — Present</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">AI Lead Consultant</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Government of El Salvador</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            AI strategy across healthcare (DoctorSV), education reform, and government services.
+            5G network optimization under USAID and EU-funded engagements. The work is less
+            about any one model and more about which levers actually exist inside large public
+            institutions — and whether you can move them.
+          </p>
+        </div>
 
-  <p>
-    Miguel lives in Mexico City and enjoys photography, hiking, biking, and driving around the country. On his
-    free time you can spot him in a local mezcalería, or dancing salsa.
-  </p>
-</PageLayout>
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2022 — 2024</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">Staff Software Engineer</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Kavak</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            Led the Data Engineering team — pipelines, cloud infrastructure, the work that
+            keeps analytics functional when the company is operating across multiple countries.
+            The engineering constraints were real.
+          </p>
+        </div>
+
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2018 — 2022</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">Software Designer / Data Scientist</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Globant</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            Computer Vision, NLP, Anomaly Detection — different clients, different industries.
+            Mentored the Mexico data science team. Consulting means being useful to an
+            organization you don't fully understand yet. That skill transfers.
+          </p>
+        </div>
+
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2016 — 2018</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">Data Science Manager</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Cultura Colectiva</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            Built the data science team from scratch. We were doing content evaluation and
+            generation work before any of the current tooling existed — the hard way. Most of
+            the company's BI ran through the team. In September 2017 the same team pivoted to
+            build <strong>Verificado19s</strong>, a real-time data verification platform for
+            the Mexico City earthquake. It's still the most important thing I've worked on,
+            and it isn't close.
+          </p>
+        </div>
+
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2016</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">Data Science Lead — Data Lab</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Presidency of Mexico — Open Data Initiative</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            A centralized team inside the federal government: find the problem, build the
+            solution, ship it. Cloud infrastructure for analytical workloads across multiple
+            agencies. Short stint, real work.
+          </p>
+        </div>
+
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2015 — 2016</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">Data Scientist / Data Engineer</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Globant · OPI Analytics</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            Distribution optimization at Globant — tight constraints, real money, discrete
+            math, no neural nets. At OPI, full-picture startup engineering: Docker when it
+            was still raw, cloud ops, Ruby, Node, Mongo, Postgres, the whole pipeline from
+            nothing to shipped.
+          </p>
+        </div>
+
+        <div class="timeline-entry">
+          <p class="font-sans text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">2010 — 2015</p>
+          <h3 class="mt-1 font-serif text-xl font-semibold">Data Analyst</h3>
+          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Center for Emergency Attention and Citizen Protection, Mexico City</p>
+          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+            First job out of university. Crime prediction models, weekly officer evaluations,
+            a pipeline that ran through Excel macros and Matlab. The math was the easy part.
+            Designing something a commander could act on at 6am — that was the job.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="border-t border-[color:var(--border)] pt-12">
+      <h2 class="mb-6 font-sans text-sm uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
+        Teaching
+      </h2>
+      <p class="font-sans text-sm text-[color:var(--text-muted)]">ITAM · 2020–2024</p>
+      <ul class="mt-3 space-y-1 font-serif text-base text-[color:var(--text-muted)]">
+        <li>NoSQL for Data Science (M.Sc.)</li>
+        <li>Introduction to Programming for Data Science (M.Sc.)</li>
+        <li>Applied Analysis in Computational Mathematics</li>
+      </ul>
+    </section>
+
+    <section class="mt-12 border-t border-[color:var(--border)] pt-12">
+      <h2 class="mb-6 font-sans text-sm uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
+        Selected Publications
+      </h2>
+      <ul class="space-y-4">
+        {[
+          {
+            year: '2019',
+            citation: 'Esquinca, Escalante et al. ',
+            title: 'Recomendaciones para Sociedad Civil',
+            venue: 'Google Play Store.',
+          },
+          {
+            year: '2016',
+            citation: 'Martinez, Escalante, Beguerisse-Díaz et al. ',
+            title: 'Understanding Human Behavior in Urban Spaces',
+            venue: 'IJWSR.',
+          },
+          {
+            year: '2013',
+            citation: 'Prieto, Escalante et al. ',
+            title: 'Análisis Criminal y Uso de Cámaras de Seguridad en la CDMX',
+            venue: 'Buenas Prácticas para el Análisis Delictual en América Latina.',
+          },
+        ].map(({ year, citation, title, venue }) => (
+          <li class="grid grid-cols-[3.5rem_1fr] gap-4 font-serif text-base">
+            <span class="font-sans text-xs text-[color:var(--text-muted)] pt-0.5">{year}</span>
+            <span class="text-[color:var(--text-muted)]">
+              {citation}<em class="text-[color:var(--text)]">{title}</em>. {venue}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="mt-12 border-t border-[color:var(--border)] pt-12">
+      <p class="font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+        San Salvador now, Mexico City before that. Trail, camera, mezcalería.
+        I'm easier to reach by <a href="mailto:escalas5@gmail.com">email</a> than through any form.
+      </p>
+    </section>
+
+  </div>
+</BaseLayout>
