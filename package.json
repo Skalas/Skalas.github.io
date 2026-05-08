@@ -17,6 +17,9 @@
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/rss": "^4.0.18"
   },
+  "overrides": {
+    "fast-xml-builder": "^1.2.0"
+  },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",
     "@tailwindcss/typography": "^0.5.19",
