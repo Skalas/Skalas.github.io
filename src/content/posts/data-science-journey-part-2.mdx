@@ -1,72 +1,80 @@
 ---
-title: "Eight years in, and data science still surprises me — Part 2"
-description: "The current chapter: the work I'm doing now, why it's shaped by LLMs more than I expected, and what still hasn't changed."
-date: 2026-04-20
+title: "From Verificado19s to DoctorSV — Part 2"
+description: "Part 2 of 2. The eight years after Verificado19s — Globant again, OPI and Kavak, then back to public service in El Salvador."
+date: 2026-05-11
 category: Career
-tags: [data-science, ai, llm, career]
+tags: [data-science, ai, llm, career, el-salvador]
 hero: ../../assets/heroes/post-bg-05.jpg
 heroAlt: "Abstract contemporary pattern"
-draft: true
+draft: false
 ---
 
 import Aside from '../../components/Aside.astro';
 
 <Aside>
-  This is Part 2. <a href="/data-science-journey-2024">Part 1</a> covers 2012–2018 — police analytics, consulting, the years at Cultura Colectiva. This one is about what I'm working on now.
+  This is Part 2 — the current chapter. <a href="/data-science-journey-2024">Part 1</a> covers 2012–2017: police analytics, consulting, Cultura Colectiva, Verificado19s.
 </Aside>
 
-{/* TODO(miguel): this is a scaffold. Rewrite each section in your own voice — or delete whole blocks that don't apply. The goal is the same tone as Part 1: short, specific, no LinkedIn speak. */}
+Part 1 stopped at Verificado19s in 2017. Where the next eight years would land was not something I could have guessed back then. My path might be useful to others, so here's my perspective.
 
-## The short version
+## Globant, again
 
-{/* TODO(miguel): 2–3 sentences. What's the current role? Who are you building for? What's the one line someone in a meeting would use to describe your work? */}
+After Cultura Colectiva I went back to Globant. More seniority this time, and what I'd come back for: leading the AI team. The hook was computer vision for medical imaging. My former boss called me about it, and that was enough.
 
-Since the end of 2024 I've been working on _____. The thing that's different from everything in Part 1 is that the median unit of work now is a conversation with a model, not a query against a table.
+More models and more deep learning followed. NLP for legal applications, right before ChatGPT. I implemented the end-to-end for a deep neural net for the first time.
 
-## What actually changed
+Impostor syndrome the whole way through. Some things I got right. Other things I didn't. One reframe stuck and I still use it: don't say no. Say "what if we do this instead."
 
-{/* TODO(miguel): the most personal section. Pick the 2–3 things that feel genuinely different day-to-day compared to 2018 data science. Some hooks you can use or discard: */}
+## OPI, then Kavak
 
-- **The tools got weird.** I spend more time writing prompts and evals than writing SQL. The evals are harder than the prompts.
-- **The ceiling moved.** Problems I used to triage as "not worth building a model for" are now a forty-five-minute experiment.
-- **The ground moved.** Things I spent years getting good at (feature engineering, classical ML hyperparameter tuning, hand-tuned recsys) matter less. Not zero, but less.
+I went back to OPI for a bit. While I was there, OPI was acquired by Kavak. I spent the next stretch closing out OPI's still-active contracts, then went fully into Kavak. Two years there, on the pricing team.
 
-{/* Pick the ones that are true. Add your own. If none of these resonate, write the thing that does. */}
+Pricing had two halves: engineering, which made the models work, and data science, which made the models themselves. I led the engineering side. We owned the pipelines feeding Kavak's pricing across every market it operated in.
 
-## What didn't change
+It was a jump from consultancy to closing projects to inside a unicorn, stacked close together. Wild. I fumbled more than once. Things stabilized enough that the pipelines did what they needed to do, which is the only bar that matters.
 
-{/* TODO(miguel): this is the throughline to Part 1. Here's what I'd argue carries over — edit as needed: */}
+The part worth saying plainly: I was happy and humbled to lead the people I led there.
 
-Most of the job is still plumbing. The model is still ten percent. The rest is still:
+## El Salvador
 
-- Getting the data into shape.
-- Getting a human to act on the output.
-- Making the thing run tomorrow morning without you babysitting it.
+A friend called and asked if I wanted to move to El Salvador. I said no.
 
-LLMs did not abolish any of that. If anything they moved it around. Now instead of a malformed CSV you get a confidently hallucinated JSON.
+The jobs were stable, the pipelines were working. That's usually when I start looking around — but moving countries after 16 years in Mexico was harder math. Still: "you always have good ideas, let's talk." Two months later, in early 2024, I was changing countries.
 
-## The project I can actually talk about
+When I arrived, my sole responsibility was 5G: mapping tower signal, calculating coverage, optimizing it. Health was a personal objective I brought with me, and I worked it in over time. Other things followed.
 
-{/* TODO(miguel): pick one concrete thing to describe in detail. A feature, a tool, a system you shipped in the last 6–12 months. The specifics are what make this post not feel like every other AI think-piece. If everything is under NDA, pick a side project or an open-source thing. */}
+The thing I had not felt in gov work before was political will pointed in the right direction. The intent at the top and the work itself lined up on the same outcome: the population. That is not the default. It changes what you can ship.
 
-_____.
+This is my second time working inside a national government on AI. The first was the Data Lab at the Mexican Presidency in 2016, a chapter Part 1 didn't have room for. The texture is similar in both. The technical problem is usually solvable. The scaffolding around it — political, operational, who-talks-to-whom — is what eats the year. Verificado19s taught me what good decisions during a crisis look like. I wanted that back. El Salvador is small enough that decisions and their effects sit close together.
+
+Then I jumped to DoctorSV.
+
+## DoctorSV
+
+DoctorSV was the type of work I wanted when I came here. It is the country's public telemedicine system. A Salvadoran picks up the phone, gets a doctor on a video call, gets a prescription, picks up the medicine at a pharmacy. The AI does the parts AI is good at: triage, summarizing the symptoms before the doctor sees them, flagging the things that should not be missed.
+
+We launched on November 13, 2025. I remember the day plainly. Every AI system in it had been built by me or by the team I led, and the team was brilliant.
+
+The thing I keep from this work is what it felt like to build something a country actually used. Millions of people opened it on their phones, got a real doctor on the other end, got real medicine. Six months in: 1.1 million registrations, 1.5 million appointments. Now in phase 2, chronic-disease monitoring.
+
+Shipping into a national health system changes the failure modes. On the other end of the API is a doctor with a patient in front of them, deciding whether to trust the system enough to act. That changes what "good enough to ship" means. What you evaluate. What counts as a regression. How much you'll risk on a Friday deploy.
+
+## What the work actually looks like now
+
+The honest version of my day is that I'm a manager who codes. Most mornings I'm in Claude, on the same problems the team is on. Sometimes ahead, sometimes behind, sometimes as a second pair of eyes on something about to ship. The job is to keep the output bar where it needs to be, which mostly means catching what the team didn't and fixing it on the way past.
+
+This is not how I would have described management to my younger self. Back then I thought the move from manager-who-codes to pure manager was the maturity arc. Let go of the keyboard. Trust the team. Nobody tells you that the keyboard comes back. Claude changed the cost-benefit on staying technical as a manager, so I stayed technical, on purpose. I ship more in a morning than I used to, and the team gets a reviewer who's already in the code.
 
 ## What I'd tell my 2024 self
 
-{/* TODO(miguel): mirror the structure of Part 1's closing. Two short pieces of advice. Examples to riff on: */}
+**The keyboard came back.** Claude made it worth keeping the moment it landed. The teams that ship now are the ones where the senior people are still in the diff. The manager-track-as-departure-from-the-work idea has not aged well.
 
-**Evaluation is the job now.** The model is a commodity; the eval suite is the product. If you are not measuring your system more carefully than you built it, you are guessing.
+**Political will matters more than the model.** The technical problem is usually solvable. Whether the system actually ships, gets used, gets believed — that lives in whether intent at the top lines up with intent at the bottom. When it does, the work you can do is not comparable to anywhere else.
 
-**Speed of iteration beats cleverness of architecture.** The teams winning right now are the ones who can run a new experiment in an hour, not the ones who designed the fanciest system.
-
-{/* or whatever you actually believe. */}
-
-## What's next
-
-{/* TODO(miguel): optional. If there's a theme you want to write about in 2026 — a series, a book-in-progress, a talk — tease it here. If not, delete this section. */}
-
-More writing, honestly. I want to use this site more. The last nine years mostly lived in Slack threads and internal wikis; it's time to get some of it out in the open.
+**The bar is one person opening the thing and being helped by it.** Dashboards, metrics, architecture — those exist to serve that one bar. The question is whether someone real, on the other end, used the thing and was better off for it.
 
 ---
 
-If any of the above is wrong or there's a thread you'd like pulled, [email me](mailto:escalas5@gmail.com).
+That's the eight years since Part 1.
+
+If any of this is wrong, or there's a thread you want pulled, reach out.
