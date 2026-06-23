@@ -7,7 +7,7 @@ interface Props {
   image?: string;
   imageAlt?: string;
   imageWidth?: number;
-  imageHeight?: number;
+  imageHeight?: number; // omit unless both width and height are known
   type?: 'website' | 'article';
   publishedAt?: Date;
   updatedAt?: Date;
@@ -20,8 +20,8 @@ const {
   description = SITE.description,
   image,
   imageAlt,
-  imageWidth = 1900,
-  imageHeight = 600,
+  imageWidth,
+  imageHeight,
   type = 'website',
   publishedAt,
   updatedAt,
@@ -91,8 +91,12 @@ const jsonLd =
 {imageURL && (
   <>
     <meta property="og:image" content={imageURL} />
-    <meta property="og:image:width" content={String(imageWidth)} />
-    <meta property="og:image:height" content={String(imageHeight)} />
+    {imageWidth && imageHeight && (
+      <>
+        <meta property="og:image:width" content={String(imageWidth)} />
+        <meta property="og:image:height" content={String(imageHeight)} />
+      </>
+    )}
     <meta property="og:image:alt" content={imageAlt ?? title ?? SITE.title} />
   </>
 )}
@@ -106,4 +110,4 @@ const jsonLd =
 <meta name="twitter:description" content={description} />
 {imageURL && <meta name="twitter:image" content={imageURL} />}
 
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
