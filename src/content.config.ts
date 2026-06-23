@@ -16,7 +16,6 @@ const posts = defineCollection({
       hero: image().optional(),
       heroAlt: z.string().optional(),
       mathjax: z.boolean().default(false),
-      redirectFrom: z.array(z.string()).default([]),
     }),
 });
 

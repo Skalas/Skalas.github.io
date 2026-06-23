@@ -52,9 +52,13 @@ const readingMeta = [
   description={description}
   image={image}
   imageAlt={imageAlt ?? heroAlt ?? title}
+  imageWidth={hero?.width}
+  imageHeight={hero?.height}
   type="article"
   publishedAt={date}
   updatedAt={updated}
+  tags={tags}
+  section={category}
   mathjax={mathjax}
 >
   {hero && (
@@ -120,7 +124,7 @@ const readingMeta = [
       <ul class="flex flex-col justify-between gap-4 sm:flex-row">
         {prev && (
           <li class="flex-1">
-            <a href={`/${prev.slug}`} class="block no-underline group">
+            <a href={`/${prev.slug}/`} class="block no-underline group">
               <span class="block text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
                 Previous
               </span>
@@ -132,7 +136,7 @@ const readingMeta = [
         )}
         {next && (
           <li class="flex-1 sm:text-right">
-            <a href={`/${next.slug}`} class="block no-underline group">
+            <a href={`/${next.slug}/`} class="block no-underline group">
               <span class="block text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
                 Next
               </span>
