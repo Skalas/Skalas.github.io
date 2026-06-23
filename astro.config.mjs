@@ -15,7 +15,10 @@ const lastmodBySlug = Object.fromEntries(
         /^---\n([\s\S]*?)\n---/,
       )?.[1] ?? '';
       const read = (key) =>
-        frontmatter.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]?.trim().replace(/^["']|["']$/g, '');
+        frontmatter
+          .match(new RegExp(`^${key}:\\s*([^#\\n]+)`, 'm'))?.[1]
+          ?.trim()
+          .replace(/^["']|["']$/g, '');
       return [file.replace(/\.mdx?$/, ''), read('updated') ?? read('date')];
     })
     .filter(([, date]) => date),
