@@ -27,7 +27,7 @@ export const GET: APIRoute = async () => {
   lines.push('');
   for (const post of posts) {
     const desc = post.data.description ? `: ${post.data.description}` : '';
-    lines.push(`- [${post.data.title}](${SITE.url}/${post.id})${desc}`);
+    lines.push(`- [${post.data.title}](${SITE.url}/${post.id}/)${desc}`);
   }
   lines.push('');
   lines.push('## Usage');

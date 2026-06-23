@@ -54,7 +54,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
                 <FormattedDate date={post.data.date} />
               </div>
               <div>
-                <a href={`/${post.id}`} class="no-underline">
+                <a href={`/${post.id}/`} class="no-underline">
                   <h3 class="font-serif text-2xl font-semibold leading-tight text-[color:var(--text)] transition-colors duration-200 group-hover:text-[color:var(--link)] md:text-3xl">
                     {post.data.title}
                     <span

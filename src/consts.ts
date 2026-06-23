@@ -4,6 +4,7 @@ export const SITE = {
   description:
     'Notes on data science, machine learning, engineering, and life in Mexico City — by Miguel Escalante.',
   url: 'https://skalas.me',
+  defaultOgImage: { src: '/og-default.jpg', width: 1900, height: 600 },
   author: {
     name: 'Miguel Escalante',
     email: 'escalas5@gmail.com',
