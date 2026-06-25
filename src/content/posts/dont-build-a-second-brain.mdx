@@ -1,0 +1,108 @@
+---
+title: "Don't Build a Second Brain"
+description: "Several agents, one knowledge base. How I centralized the rules without building a second system to run them."
+date: 2026-06-25
+category: Systems
+tags: [ai, agents, mcp, obsidian, automation]
+hero: ../../assets/heroes/post-bg-03.jpg
+heroAlt: "Abstract neural pattern"
+draft: false
+---
+
+import Aside from '../../components/Aside.astro';
+
+I have a few agents now. Claude Code on the laptop. A CLI orchestrator I call OpenClaw, with an agent named Nico. A Telegram agent named Hermes. They all do different work, on different machines.
+
+They also all want to write down what they learn. Into the same place: an Obsidian vault that is my single source of truth, synced over iCloud. One brain, many hands reaching into it.
+
+Each agent already had a "dream" pass — a nightly job that reads the day's sessions and consolidates the durable parts into the vault. Three agents, three dream passes. And here's the problem: the *rules* those passes had to agree on — how to sign an entry, what's too sensitive to touch, how to dedup — were copy-pasted into all three. They had already started to drift.
+
+## The wrong turn I almost took
+
+The obvious fix is a service. Build one "dreamer": an MCP server that exposes `stage_session()` and `run_consolidation()`, and have every agent call it. One engine, no duplication. I had the design half-drawn.
+
+It's wrong, and it took me a beat to see why.
+
+I already had an MCP server — `brain-mcp` — that serves the vault to every agent. Building a second one to run dreams meant a second surface that overlapped the first. And it pulled *staging* — currently a plain file write any agent can do, even offline — behind a network call. That's more coupling, not less. I'd have been adding a system to remove duplication, which is usually a sign you've misnamed the problem.
+
+The thing that was duplicated wasn't the engine. It was the decisions.
+
+## Make the rules data, not code
+
+So I stopped thinking about a service and started thinking about a contract.
+
+The decisions every agent must agree on are small and they don't change often: how you sign a section, which topics are off-limits, what counts as worth keeping. That's a *policy*. And a policy is a file, not a process.
+
+`brain-mcp` already served my vault conventions to every agent with one tool. I just gave it two more, each a three-line reader:
+
+```python
+@mcp.tool()
+def get_consolidation_policy() -> str:
+    """The cross-agent rules every dream pass must obey."""
+    return (VAULT / "_system" / "dream-policy.md").read_text()
+```
+
+No new server. No new surface. The policy lives as one markdown file in the vault; the tool is just a window onto it. Three documents ended up mattering, and separating their roles is what keeps the whole thing honest:
+
+- **the policy** — the law. The invariants every agent must obey.
+- **the instructivo** — the how. The canonical shape of a dream pass, for when you build a new one.
+- **the architecture** — the map. Who ingests what, and where it goes.
+
+Each agent runs its *own* pass, on its *own* sources. They just read the same rulebook before they write.
+
+## The part that surprised me
+
+The two channels turned out to be different, and naming that fixed a lot of confusion.
+
+The vault — the brain, the content — travels by iCloud. Its git history is local; I never push it. Edit a rule in `dream-policy.md`, and iCloud carries it to the other machine. Every agent picks up the new version on its next run. I don't deploy or restart anything.
+
+`brain-mcp` — the transport, the tools — travels by git. That's the only thing I ever `git pull`.
+
+<Aside>
+  Content by iCloud, tools by git. Once I had that sentence, the rest of the system stopped feeling like it was fighting me. Most changes are rule changes — edit one file, everyone inherits. You only touch git on the rare day you add a tool.
+</Aside>
+
+## Living in the same file without stepping on each other
+
+Multiple agents appending to the same note is where things usually rot. Two rules keep it boring, which is what you want:
+
+Every section is attributable. Either it carries an agent signature in the heading, or — for entries an ingestion pipeline produced — a source marker in the body:
+
+```markdown
+## 2026-06-25 — Hermes
+- Insight: centralized the coexistence policy across agents.
+```
+
+And no agent edits a section it doesn't own. Conflicts are resolved by *appending*, never by editing someone else's words. Writes are append-only, which is also what lets a dumb script auto-merge an iCloud conflict later — the convention pays for itself twice.
+
+The dedup ledger got the same treatment. It used to be one shared file; on a synced disk, two machines writing it would silently clobber each other. Now each machine writes its own shard and everyone reads the union. No locks. You remove the shared writable thing instead of guarding it.
+
+## Coding sessions lie about what they're worth
+
+One more thing I had to get right, because it's specific to coding agents.
+
+A coding session is usually about what you *did*, not what you said. "Fix the import, run the tests, done." The durable nugget is the decision, if there even is one — not the transcript. So the pass should extract the decision and drop the play-by-play.
+
+Except sometimes a coding session is a real design discussion that happens to live in a terminal. Then the reasoning *is* the value, and compressing it to one line throws away the whole point.
+
+So I tag each session at staging time — `execution`, `discussion`, or `mixed` — from how much I actually talked versus how much the agent just worked. The spine is file edits plus dialogue, not transcript length (a long grind narrates plenty). And I biased it: mislabeling a discussion as a grind loses reasoning, so when unsure it digests in full. The post you're reading was tagged `mixed`. That's correct — we built things and argued about them the whole way.
+
+## The proof I didn't write myself
+
+The nicest moment wasn't mine. I'd centralized the policy and wired Claude Code to it, but hadn't formally updated the other agents yet.
+
+Then I opened the vault and found a new section in one of my notes:
+
+```markdown
+## 2026-06-25 — Hermes
+<!-- policy:v1 -->
+- Insight: ran the dream cycle, consolidated agent memory.
+```
+
+Hermes had run its own pass, pulled `policy:v1` from the MCP server on its own, signed the section with its name, and stamped the version. A different agent, on a different schedule, wrote a conformant entry without being told to. The contract worked before I'd finished deploying it.
+
+## The lesson
+
+Centralize the decisions, not the process. The instinct is to build a service that does the thing for everyone. Usually what you actually want is a file that says how the thing should be done, somewhere everyone can read it.
+
+The agents stay independent. The rulebook is shared. And changing how they all behave is one edit to one file — not a deploy, and definitely not a second brain.
