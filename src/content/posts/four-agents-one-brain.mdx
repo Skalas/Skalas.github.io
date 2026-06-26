@@ -1,0 +1,68 @@
+---
+title: "Four Agents and a Shared Brain"
+description: "The setup before the system: who my agents are, where they live, and the one thing they all reach into."
+date: 2026-06-25
+category: Systems
+tags: [ai, agents, mcp, obsidian, telegram]
+hero: ../../assets/heroes/post-bg-04.jpg
+heroAlt: "Abstract neural pattern"
+draft: false
+---
+
+import Aside from '../../components/Aside.astro';
+
+I keep two machines on: a laptop I carry, and a Mac Mini at home that never sleeps. Between them, four agents do real work for me every day. Two live on the laptop and write code. Two live on the Mini and answer on Telegram.
+
+They don't compete. They split the house. And before I can explain how I keep them from stepping on each other, I have to introduce them — because most of what I write about this setup assumes you already know the cast.
+
+## Claude Code, on the laptop
+
+The surgical one. It's the CLI on my laptop, and it does engineering: reads a repo, edits files, runs the tests, opens the PR. When I'm building something, this is who I'm building it with.
+
+It doesn't run on its own. I sit down, I call it, we work, I close the laptop. It runs only when I'm there — a specialist you bring in for the hard part and send home after. That's the right shape for code, where the work is bursty and you want a human in the loop.
+
+## Cursor, also on the laptop
+
+The same job, a different skin. Cursor is an AI editor — the agent lives inside the IDE instead of the terminal. I reach for it on my personal projects, mostly because it's fast; when the work gets heavy I switch to Claude Code. Same kind of work, split by weight.
+
+It reaches the vault too — `brain-mcp` is wired into Cursor, so mid-session it can search my notes and write back. It's the one agent that doesn't run its own nightly pass — the memory-consolidation run that files each day's work into the vault. Instead its transcripts ride along with Claude Code's, tagged the same way, so a decision I made in the editor doesn't vanish just because it happened in a different window.
+
+## Nico, on the Mac Mini
+
+The orchestrator. Nico runs on OpenClaw — an agent platform parked on the Mini — and unlike Claude Code, I don't sit in front of it. I text it. Telegram is the interface, and Nico is always there because the Mini is always on.
+
+Nico's job is breadth, not depth. It tracks tasks, keeps context, runs the household. When a job is bigger than one reply it doesn't grind through it in the main thread — it spawns an ephemeral subagent, hands off that one task, and throws the subagent away when it's done. The orchestrator stays small; the heavy, short-lived work is disposable.
+
+## Hermes, also on the Mini
+
+The understudy. Hermes is newer, and the plan is for it to take over from Nico — same machine, same Telegram-shaped interface, a cleaner pass at the same job. That hand-off is still in progress.
+
+So for now I run both. Two independent agents on the Mini means I can put the same question to each and compare the answers — a real second opinion while I'm still deciding how far to trust the new one. It's a luxury I might keep even after the migration is done.
+
+One example of what this setup buys me is a finance tracker — a small, almost trivial piece of code that's quietly become one of the most useful things I run. That one earns a post of its own, so I'll come back to it.
+
+## The brain they share
+
+Here's what makes them a system instead of four clever toys in separate boxes.
+
+All four reach into one Obsidian vault. Plain markdown, my single source of truth — notes, daily logs, decisions, the durable stuff. The vault is the shared state; the agents are interchangeable around it.
+
+They don't each re-implement how to read and write it. A small Python MCP server — `brain-mcp` — exposes the vault as a set of tools, and every agent that speaks MCP gets the same surface: search, read, append. Write the serving logic once, point every client at it.
+
+The two halves travel differently, and that turned out to matter:
+
+<Aside>
+  Content by iCloud, tools by git. The vault — the notes themselves — syncs between machines over iCloud. `brain-mcp` — the code that serves them — lives in a git repo I pull. Edit a note and it's everywhere in seconds; touch git only on the rare day I change a tool.
+</Aside>
+
+## How it ended up this shape
+
+It didn't start here. The first external brain was Notion, because I was using Claude on the web and the web can't see your filesystem by design. Notion was the only place a browser-bound assistant and I could both reach.
+
+Once I had agents with real filesystem access, a folder of markdown beat a database I had to click through. So the brain moved local, into the vault, and the Mini came on to be the thing that's always awake — the home base while the laptop comes and goes.
+
+## The catch
+
+Claude Code and Cursor on the laptop for the coding, Nico and Hermes on the Mini answering over Telegram — one running the show, one training to take it over — four independent agents, one shared brain.
+
+Which raises the obvious problem. If they all write into the same notes, on their own schedules, from different machines — how do they not clobber each other? That's the next post, and the answer wasn't a bigger system. It was a smaller one.
