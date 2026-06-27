@@ -11,3 +11,6 @@ dist
 .env.production
 .DS_Store
 **/*~
+# Emacs lock / autosave files
+\#*\#
+.\#*
