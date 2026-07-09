@@ -6,12 +6,12 @@ category: Systems
 tags: [ai, agents, mcp, obsidian, automation]
 hero: ../../assets/heroes/post-bg-06.jpg
 heroAlt: "Abstract neural pattern"
-draft: true
+draft: false
 ---
 
 import Aside from '../../components/Aside.astro';
 
-I have a few agents now. Claude Code on the laptop, for coding. Nico and Hermes on a Mac Mini at home, both reachable over Telegram — Nico runs on a platform I call OpenClaw, and Hermes is the newer agent I'm slowly migrating to. They do different work, on different machines.
+I have a few agents now. Claude Code on the laptop, for coding. Nico and Hermes on a Mac Mini at home, both reachable over Telegram — Nico runs an OpenClaw agent, and I'm trying out Hermes so I can slowly migrate over to it. They do different work, on different machines.
 
 They also all want to write down what they learn. Into the same place: an Obsidian vault that is my single source of truth, synced over iCloud. One brain, many hands reaching into it.
 
@@ -106,3 +106,11 @@ Hermes had run its own pass, pulled `policy:v1` from the MCP server on its own, 
 Centralize the decisions, not the process. The instinct is to build a service that does the thing for everyone. Usually what you actually want is a file that says how the thing should be done, somewhere everyone can read it.
 
 The agents stay independent. The rulebook is shared. And changing how they all behave is one edit to one file — not a deploy, and definitely not a second brain.
+
+## What happened next
+
+The rulebook held, so I went after the other half. Every agent still ran its own copy of the dream code, and copies drift. I pulled them into one engine — [Mictlán](https://github.com/Skalas/mictlan) — with a thin adapter per agent. The adapters just gather what each agent learned; the engine does the consolidating, reading the same shared policy before anything lands in the vault.
+
+That's the principle holding at a bigger size: I removed the duplicated code without adding the shared network surface I'd talked myself out of here. The rules stayed a file. The engine became a library. Neither one became a second brain.
+
+That's its own post. The repo's public if you want to read ahead.
