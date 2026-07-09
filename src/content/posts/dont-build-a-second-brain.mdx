@@ -1,7 +1,7 @@
 ---
 title: "Don't Build a Second Brain"
 description: "Several agents, one knowledge base. How I centralized the rules without building a second system to run them."
-date: 2026-06-25
+date: 2026-07-08
 category: Systems
 tags: [ai, agents, mcp, obsidian, automation]
 hero: ../../assets/heroes/post-bg-06.jpg
@@ -23,7 +23,7 @@ The obvious fix is a service. Build one "dreamer": an MCP server that exposes `s
 
 It's wrong, and it took me a beat to see why.
 
-I already had an MCP server — `brain-mcp` — that serves the vault to every agent. Building a second one to run dreams meant a second surface that overlapped the first. And it pulled *staging* — currently a plain file write any agent can do, even offline — behind a network call. That's more coupling, not less. I'd have been adding a system to remove duplication, which is usually a sign you've misnamed the problem.
+I already had an MCP server — [`brain-mcp`](https://github.com/Skalas/Brain-mcp) — that serves the vault to every agent. Building a second one to run dreams meant a second surface that overlapped the first. And it pulled *staging* — currently a plain file write any agent can do, even offline — behind a network call. That's more coupling, not less. I'd have been adding a system to remove duplication, which is usually a sign you've misnamed the problem.
 
 The thing that was duplicated wasn't the engine. It was the decisions.
 
