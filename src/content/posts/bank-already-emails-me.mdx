@@ -1,6 +1,6 @@
 ---
 title: "The Bank Already Emails Me Every Transaction"
-description: "I never connected my accounts to a finance app. The bank emails every charge, so I parse those into local SQLite and nothing ever leaves my disk."
+description: "I never connected my accounts to a finance app. The bank emails every charge, so I parse those into local SQLite and nothing ever leaves my disk. Here's the blueprint."
 date: 2026-06-26
 category: Automating
 tags: [automation, python, sqlite, finance, cli]
@@ -11,87 +11,100 @@ draft: true
 
 import Aside from '../../components/Aside.astro';
 
-My bank emails me every time I swipe a card. Amount, merchant, date, all of it, pushed to my inbox in real time without my asking. For years I treated those as noise to archive. They're the only API I need.
+My bank emails me every time I swipe a card. Amount, merchant, date, all of it, in my inbox before the receipt prints. For years I archived those as noise. They're the only API I need.
 
-Personal finance tools sell you a false choice. Either you connect your real bank accounts to a third party — Plaid, Yodlee, whatever Copilot runs on — and hand your full transaction history to a SaaS, or you go back to filling a spreadsheet every Sunday night like it's 2005. Automation in exchange for your data, or privacy in exchange for your weekends.
+Personal finance tools sell you a false choice. Connect your real accounts to a third party — Plaid, Yodlee, whatever your budgeting app runs on — and hand your full transaction history to a SaaS. Or go back to filling a spreadsheet every Sunday night like it's 2005. Automation for your data, or privacy for your weekends.
 
-You don't have to pick. The bank is already pushing the data to you, one email per transaction. Parse it locally and the dilemma disappears.
+You don't have to pick. The bank already pushes the data to you, one email per transaction. Parse it locally and the dilemma disappears.
 
-In the last post I said the finance tracker earned one of its own. Here it is.
+What follows is the blueprint, not a repo. Every piece is small, and only one of them is specific to your bank.
 
 ## The shape
 
-Three small pieces, no daemon, no cloud call:
+Four moving parts, no daemon, no cloud call:
 
 ```
-[Bank email] → (Himalaya + Keychain) → [Python parser] → [SQLite: finance.db]
-                                                               │
-                                                               ▼
-[cron] ───────────────────────────────────────────────→ [SQL reports]
+[Bank email] → (IMAP client + Keychain) → [Python parser] → [SQLite: finance.db]
+                                                                   │
+                                                                   ▼
+[cron] ─────────────────────────────────────────────────→ [SQL reports]
 ```
 
 Each piece does one thing. Nothing runs in the background eating RAM, and nothing phones home.
 
 ## The bank is the API
 
-BAC Credomatic sends an email the moment a card is charged. To read those without putting a mailbox password in a config file in my repo, I use [Himalaya](https://github.com/pimalaya/himalaya), a CLI mail client that talks IMAP.
+The moment a card is charged, the alert lands in my inbox. To read those without putting a mailbox password in a config file, I use an IMAP CLI client that pulls the password from the macOS Keychain on demand:
 
-Himalaya pulls the password from the macOS Keychain on demand — `security find-generic-password` under the hood — so the secret lives in memory for the length of the run and nowhere else. The filter runs server-side against `All Mail`, not the inbox:
-
+```toml
+backend.auth.cmd = "security find-generic-password -a 'you@gmail.com' -s 'mail' -w"
 ```
-from:baccredomatic.com after:yesterday
+
+The secret lives in memory for the length of the run and nowhere else. No token in a dotfile, no password in the repo.
+
+The client fetches envelopes, then reads bodies, shelling out to the CLI and parsing its JSON:
+
+```python
+cmd = ["himalaya", "envelope", "list", "--folder", FOLDER,
+       "--output", "json", f"from {sender} and after {since}"]
 ```
 
 <Aside>
-  Filtering on `All Mail` instead of the inbox was a real fix, not a preference. Gmail's labeling rules sometimes move the bank alert out of the inbox before the script runs, and a transaction that isn't in the inbox is a transaction that silently never gets logged. Search everything, lose nothing.
+  Filter against *All Mail*, not the inbox. Gmail's own rules quietly move the bank alert to a label before your script runs, and a transaction that isn't in the inbox is a transaction you never log — you find out weeks later when a category is wrong. Point the query at `[Gmail]/Todos` and filter server-side.
 </Aside>
 
 ## Parsing emails that have accents
 
-Latin American bank alerts are messier than they look. HTML tables laid out sideways, and merchant names full of accents and `ñ`. A naive regex truncates "Farmacia Económica" or chokes on "Almacén González," and you find out weeks later when a category is quietly wrong.
+This is where most naive versions break, and where I lost the most time.
 
-So the patterns cover the full Latin set explicitly — `[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ\s\.\*\-\&]` — and the line that pulls a transaction out of the body looks like this:
+Bank alerts come in more shapes than you'd expect: a key-value block, a sideways HTML table, a plain sentence — "Compró en X por Y." My parser tries each in turn and returns the first that matches. That part is tedious but not hard.
+
+The subtle bug is the character class. Merchant names in my part of the world are full of accents and `ñ`, and the reflex pattern truncates them:
 
 ```python
-pattern = r"Fecha\s+(\d{2}/\d{2}/\d{2})\s+Moneda\s+([^\s]+)\s+Monto\s+([0-9,]+\.[0-9]{2})\s+(.+?)\s+Estado"
+# Wrong: silently drops the accented tail of "Almacén González"
+re.search(r"Comercio:\s*([A-Za-z0-9 ]+)", text)
 ```
+
+You don't get an error. You get "Almac" in your database and a category that's quietly wrong for a month. The fix is to spell out the full Latin set:
+
+```python
+r"[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ\s\.\*\-\&]"
+```
+
+The same trap waits one layer up, in the categories. `Café` and `Cafe` are two rows to SQLite, so your coffee spend splits in half across two buckets and every total lies. Normalize the category names the same way you normalize the merchants, once, before anything gets written.
 
 ## SQLite, not CSV
 
-The first version wrote transactions to a CSV. CSV is a bad database pretending to be a file. No atomicity, no real concurrency, and if the process dies halfway through a write you get a corrupted line and a bad afternoon. Sorting and deduping all happened in Python, in memory, every run.
+The first version wrote to a CSV. CSV is a bad database pretending to be a file — no atomicity, no real concurrency, and if the process dies mid-write you get a corrupted line and a bad afternoon. Sorting and deduping happened in Python, in memory, every run.
 
-I moved the whole thing to a local SQLite file. One `finance.db`, a real schema, and the database handles what I was hand-rolling:
+A local SQLite file handles all of that for you:
 
 ```sql
 CREATE TABLE IF NOT EXISTS transactions (
     msg_id        TEXT PRIMARY KEY,   -- email message id
-    date          TEXT NOT NULL,      -- YYYY-MM-DD
-    time          TEXT NOT NULL,      -- HH:MM
+    date          TEXT NOT NULL,
+    time          TEXT NOT NULL,
     merchant      TEXT NOT NULL,
     amount        REAL NOT NULL,
     currency      TEXT DEFAULT 'USD',
     category      TEXT DEFAULT 'Uncategorized',
-    status        TEXT DEFAULT 'Auto',
-    source        TEXT DEFAULT 'Email',
-    original_text TEXT                 -- raw snippet, for audits
+    original_text TEXT                -- raw snippet, for audits
 );
 ```
 
 ## Killing duplicates with a hash
 
-The email message id is a fine primary key when every transaction comes from an email. But some don't — a manual deposit, an old row imported from one of those legacy CSVs. Those have no message id, so they'd slip past the key and double up.
+The email message id is a fine primary key when every transaction comes from an email. But some don't — a manual entry, an old row from those legacy CSVs. Those have no message id and would double up.
 
-For those I build the key myself: a SHA-256 over the fields that can't change — date, time, merchant, amount. Same transaction, same hash, every time. Then `INSERT OR IGNORE` lets SQLite drop the duplicate at write time, so I never write a read-compare-write loop in Python to catch it.
+So I build the key myself: a SHA-256 over the fields that can't change — date, time, merchant, amount. Same transaction, same hash, every time. Then `INSERT OR IGNORE` lets SQLite drop the duplicate at write time, and I never write a read-compare-write loop to catch it.
 
 ## Reports are just SQL
 
 This is the payoff for using a real database. A monthly breakdown by category is one query — no pandas, no juggling lists in memory:
 
 ```sql
-SELECT
-    category,
-    ROUND(SUM(amount), 2) AS total,
-    COUNT(*)              AS n
+SELECT category, ROUND(SUM(amount), 2) AS total, COUNT(*) AS n
 FROM transactions
 WHERE date LIKE '2026-06%'
 GROUP BY category
@@ -102,6 +115,6 @@ cron runs the parser, the parser feeds the database, and the database answers qu
 
 ## Build your own
 
-The bank-specific part is small: the regex that reads one bank's email format. Everything downstream — the schema, the dedup, the reports — is the same no matter who you bank with. Split those two and the parser becomes the only thing anyone has to swap to point this at their own bank.
+The bank-specific part is one thing: the regex that reads your bank's email. Everything downstream — the Keychain trick, the schema, the dedup, the reports — is the same no matter who you bank with. Split those two and the parser is the only piece anyone has to swap.
 
-If you want to start, the order that worked for me was: read your own bank alert and write the regex first, point it at a throwaway `finance.db`, then wire up cron once the numbers look right. Your transaction history is worth more than the convenience you'd trade it for.
+The order that worked for me: read one of your own alerts and write the parser first, point it at a throwaway `finance.db`, then wire up cron once the numbers look right. Your transaction history is worth more than the convenience you'd trade it for.
