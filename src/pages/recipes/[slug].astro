@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { recipePath } from '../../lib/recipes';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map((recipe) => ({
+    params: { slug: recipePath(recipe.id).split('/').filter(Boolean).at(-1) },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await render(recipe);
+const { data } = recipe;
+const hasDirectSource = data.originType === 'recipe' && Boolean(data.originUrl);
+const nutrition = [
+  data.calories && { label: 'Calories', value: `${data.calories} kcal` },
+  data.protein && { label: 'Protein', value: `${data.protein}g` },
+  data.carbs && { label: 'Carbs', value: `${data.carbs}g` },
+  data.fat && { label: 'Fat', value: `${data.fat}g` },
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<BaseLayout title={data.title} description={data.description} section="Recipes">
+  <article class="container-prose pb-8 pt-14 md:pt-20">
+    <a href="/recipes/" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] no-underline text-[color:var(--text-muted)] hover:text-[color:var(--link)]">
+      <span aria-hidden="true">←</span> All recipes
+    </a>
+
+    <header class="border-b border-[color:var(--border)] pb-10 pt-10 md:pb-12">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--text-muted)]">Kitchen note</p>
+      <h1 class="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-[color:var(--text)] sm:text-5xl md:text-6xl">
+        {data.title}
+      </h1>
+      <p class="mt-6 max-w-2xl font-serif text-xl leading-relaxed text-[color:var(--text-muted)]">{data.description}</p>
+
+      {(data.totalTime || data.servings) && (
+        <dl class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm">
+          {data.totalTime && <div><dt class="inline text-[color:var(--text-muted)]">Time </dt><dd class="inline font-medium">{data.totalTime}</dd></div>}
+          {data.servings && <div><dt class="inline text-[color:var(--text-muted)]">Serves </dt><dd class="inline font-medium">{data.servings}</dd></div>}
+        </dl>
+      )}
+    </header>
+
+    {nutrition.length > 0 && (
+      <section class="border-b border-[color:var(--border)]" aria-labelledby="nutrition-title">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 pt-6">
+          <h2 id="nutrition-title" class="text-xs uppercase tracking-[0.15em] text-[color:var(--text-muted)]">Nutrition</h2>
+          {data.nutritionScope && (
+            <p class="text-xs text-[color:var(--text-muted)]">
+              {data.nutritionBasis === 'source_provided_approximate' ? 'Approximate · ' : ''}{data.nutritionScope}
+            </p>
+          )}
+        </div>
+        <dl class="grid grid-cols-2 sm:grid-cols-4">
+          {nutrition.map((item) => (
+            <div class="border-[color:var(--border)] py-6 even:border-l sm:border-l sm:first:border-l-0 sm:px-5 sm:first:pl-0">
+              <dt class="text-xs uppercase tracking-[0.12em] text-[color:var(--text-muted)]">{item.label}</dt>
+              <dd class="mt-1 font-display text-2xl font-semibold text-[color:var(--text)]">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="pb-5 text-xs leading-relaxed text-[color:var(--text-muted)]">
+          {data.nutritionNote ?? 'Values shown as recorded in the note; the serving basis may be unspecified.'}
+        </p>
+      </section>
+    )}
+
+    {hasDirectSource && (
+      <aside class="recipe-origin" aria-label="Recipe origin">
+        <div>
+          <p class="text-xs uppercase tracking-[0.15em] text-[color:var(--text-muted)]">From the source</p>
+          <p class="mt-2 font-serif text-lg text-[color:var(--text)]">
+            {data.creator ?? data.source}
+            {data.creator && data.source && <span class="text-[color:var(--text-muted)]"> · {data.source}</span>}
+          </p>
+        </div>
+        <a href={data.originUrl} target="_blank" rel="noopener noreferrer" class="origin-link">
+          View original recipe
+          <svg aria-hidden="true" viewBox="0 0 16 16" class="h-4 w-4 fill-none stroke-current" stroke-width="1.5"><path d="M5.25 3.25h7.5v7.5M12.5 3.5l-9 9" /></svg>
+        </a>
+      </aside>
+    )}
+
+    <div class="recipe-prose prose prose-slate max-w-none dark:prose-invert">
+      <Content />
+    </div>
+
+    <footer class="mt-16 border-t border-[color:var(--border)] pt-8">
+      <a href="/recipes/" class="font-serif text-lg no-underline">← Back to the kitchen notebook</a>
+    </footer>
+  </article>
+</BaseLayout>

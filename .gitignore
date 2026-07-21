@@ -1,5 +1,7 @@
 _site
 node_modules
+.venv-analyst/
+__pycache__/
 .sass-cache
 .jekyll-cache
 .jekyll-metadata

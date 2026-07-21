@@ -1,0 +1,1181 @@
+[
+  {
+    "id": "recipe-2-minute-protein-brownie",
+    "title": "2-Minute Protein Brownie",
+    "file": "recipe-2-minute-protein-brownie.md",
+    "source_path": "src/content/recipes/recipe-2-minute-protein-brownie.md",
+    "source_provided_metadata": {
+      "servings": 1,
+      "calories": 312,
+      "protein": 49,
+      "carbs": 16,
+      "fat": 8
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 312,
+        "protein": 49,
+        "carbs": 16,
+        "fat": 8
+      },
+      "servings": 1,
+      "serving_basis": "per portion",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 1,
+      "calories": 312,
+      "protein": 49,
+      "carbs": 16,
+      "fat": 8
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-3-minute-nutella",
+    "title": "3 Minute Nutella",
+    "file": "recipe-3-minute-nutella.md",
+    "source_path": "src/content/recipes/recipe-3-minute-nutella.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 480,
+        "protein": 37,
+        "carbs": 60,
+        "fat": 16
+      },
+      "servings": 1,
+      "serving_basis": "whole bowl",
+      "variant": "Kara protein modification",
+      "stated_as_approximate": true
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "The body presents original and Kara-modified versions; choose a canonical recipe variant before setting metadata.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "The body presents original and Kara-modified versions; choose a canonical recipe variant before setting metadata."
+  },
+  {
+    "id": "recipe-4-ingredient-protein-bagels",
+    "title": "4-Ingredient Protein Bagels",
+    "file": "recipe-4-ingredient-protein-bagels.md",
+    "source_path": "src/content/recipes/recipe-4-ingredient-protein-bagels.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 254,
+        "protein": 18,
+        "carbs": 44,
+        "fat": 1
+      },
+      "servings": 4,
+      "serving_basis": "per bagel",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 4,
+      "calories": 254,
+      "protein": 18,
+      "carbs": 44,
+      "fat": 1
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-bang-bang-chicken-tenders",
+    "title": "Bang Bang Chicken Tenders",
+    "file": "recipe-bang-bang-chicken-tenders.md",
+    "source_path": "src/content/recipes/recipe-bang-bang-chicken-tenders.md",
+    "source_provided_metadata": {
+      "servings": 2,
+      "calories": 477,
+      "protein": 50,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 477,
+        "protein": 50,
+        "carbs": null,
+        "fat": null
+      },
+      "servings": 2,
+      "serving_basis": "per serving (3 fillets)",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "The source omits carbohydrate and fat values.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "The source omits carbohydrate and fat values."
+  },
+  {
+    "id": "recipe-chicken-crust-pizza",
+    "title": "Chicken Crust Pizza",
+    "file": "recipe-chicken-crust-pizza.md",
+    "source_path": "src/content/recipes/recipe-chicken-crust-pizza.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 510,
+        "protein": 48,
+        "carbs": 6,
+        "fat": 32
+      },
+      "servings": 3,
+      "serving_basis": "per portion",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 3,
+      "calories": 510,
+      "protein": 48,
+      "carbs": 6,
+      "fat": 32
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-chicken-pesto-bake",
+    "title": "Chicken Pesto Bake",
+    "file": "recipe-chicken-pesto-bake.md",
+    "source_path": "src/content/recipes/recipe-chicken-pesto-bake.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 484,
+        "protein": 51.4,
+        "carbs": 47.2,
+        "fat": 8.89
+      },
+      "servings": 6,
+      "serving_basis": "per serving",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 6,
+      "calories": 484,
+      "protein": 51.4,
+      "carbs": 47.2,
+      "fat": 8.89
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-chocolate-protein-mousse",
+    "title": "Chocolate Protein Mousse",
+    "file": "recipe-chocolate-protein-mousse.md",
+    "source_path": "src/content/recipes/recipe-chocolate-protein-mousse.md",
+    "source_provided_metadata": {
+      "servings": 3,
+      "calories": 400,
+      "protein": 29,
+      "carbs": 41,
+      "fat": 10
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 400,
+        "protein": 29,
+        "carbs": 41,
+        "fat": 10
+      },
+      "servings": 3,
+      "serving_basis": "per portion",
+      "variant": "recipe as written",
+      "stated_as_approximate": true
+    },
+    "proposed_metadata": {
+      "servings": 3,
+      "calories": 400,
+      "protein": 29,
+      "carbs": 41,
+      "fat": 10
+    },
+    "basis": "source_provided_approximate",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "medium",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-cottage-cheese-chocolate-bake-toddler-approved",
+    "title": "Cottage Cheese Chocolate Bake (Toddler Approved)",
+    "file": "recipe-cottage-cheese-chocolate-bake-toddler-approved.md",
+    "source_path": "src/content/recipes/recipe-cottage-cheese-chocolate-bake-toddler-approved.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "no complete macro statement",
+      "candidate": null
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "no source-provided complete macros; no calculated estimate",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "No stated yield or serving count.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "No stated yield or serving count."
+  },
+  {
+    "id": "recipe-gooey-protein-banana-chocolate-cake-air-fryer",
+    "title": "Gooey Protein Banana Chocolate Cake (Air Fryer)",
+    "file": "recipe-gooey-protein-banana-chocolate-cake-air-fryer.md",
+    "source_path": "src/content/recipes/recipe-gooey-protein-banana-chocolate-cake-air-fryer.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 189,
+        "protein": 13.5,
+        "carbs": 31,
+        "fat": 3
+      },
+      "servings": 2,
+      "serving_basis": "per serve",
+      "variant": "without optional chocolate",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "The source gives different macro panels with and without the optional chocolate; metadata cannot represent both without a declared default.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "The source gives different macro panels with and without the optional chocolate; metadata cannot represent both without a declared default."
+  },
+  {
+    "id": "recipe-healthy-chicken-gyro",
+    "title": "Healthy Chicken Gyro",
+    "file": "recipe-healthy-chicken-gyro.md",
+    "source_path": "src/content/recipes/recipe-healthy-chicken-gyro.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 309,
+        "protein": 34,
+        "carbs": 26,
+        "fat": 7.5
+      },
+      "servings": 2,
+      "serving_basis": "per gyro",
+      "variant": "recipe as written",
+      "stated_as_approximate": true
+    },
+    "proposed_metadata": {
+      "servings": 2,
+      "calories": 309,
+      "protein": 34,
+      "carbs": 26,
+      "fat": 7.5
+    },
+    "basis": "source_provided_approximate",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "medium",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-healthy-low-ingredient-protein-cookies",
+    "title": "Healthy Low-Ingredient Protein Cookies",
+    "file": "recipe-healthy-low-ingredient-protein-cookies.md",
+    "source_path": "src/content/recipes/recipe-healthy-low-ingredient-protein-cookies.md",
+    "source_provided_metadata": {
+      "servings": 12,
+      "calories": 123,
+      "protein": 10,
+      "carbs": 14,
+      "fat": 4
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 123,
+        "protein": 10,
+        "carbs": 14,
+        "fat": 4
+      },
+      "servings": 12,
+      "serving_basis": "per cookie",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 12,
+      "calories": 123,
+      "protein": 10,
+      "carbs": 14,
+      "fat": 4
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-high-protein-berry-cheesecake",
+    "title": "High-Protein Berry Cheesecake",
+    "file": "recipe-high-protein-berry-cheesecake.md",
+    "source_path": "src/content/recipes/recipe-high-protein-berry-cheesecake.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 345,
+        "protein": 40,
+        "carbs": 28,
+        "fat": 8
+      },
+      "servings": 1,
+      "serving_basis": "per portion",
+      "variant": "Kara modified version",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "The source presents original and Kara-modified versions; choose a canonical recipe variant before setting metadata.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "The source presents original and Kara-modified versions; choose a canonical recipe variant before setting metadata."
+  },
+  {
+    "id": "recipe-high-protein-breakfast-burritos-beef-bacon-egg",
+    "title": "High-Protein Breakfast Burritos (Beef, Bacon & Egg Edition)",
+    "file": "recipe-high-protein-breakfast-burritos-beef-bacon-egg.md",
+    "source_path": "src/content/recipes/recipe-high-protein-breakfast-burritos-beef-bacon-egg.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 530,
+        "protein": 56,
+        "carbs": 28,
+        "fat": 24
+      },
+      "servings": 5,
+      "serving_basis": "per burrito",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 5,
+      "calories": 530,
+      "protein": 56,
+      "carbs": 28,
+      "fat": 24
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-high-protein-cheesy-chicken-pesto-bake",
+    "title": "High Protein Cheesy Chicken Pesto Bake",
+    "file": "recipe-high-protein-cheesy-chicken-pesto-bake.md",
+    "source_path": "src/content/recipes/recipe-high-protein-cheesy-chicken-pesto-bake.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 498,
+        "protein": 50,
+        "carbs": 45,
+        "fat": 12
+      },
+      "servings": 4,
+      "serving_basis": "per portion",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 4,
+      "calories": 498,
+      "protein": 50,
+      "carbs": 45,
+      "fat": 12
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-high-protein-onion-chips",
+    "title": "High Protein Onion Chips",
+    "file": "recipe-high-protein-onion-chips.md",
+    "source_path": "src/content/recipes/recipe-high-protein-onion-chips.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 293,
+        "protein": 33,
+        "carbs": 23,
+        "fat": 5
+      },
+      "servings": null,
+      "serving_basis": "whole batch",
+      "variant": "parmesan and spray oil treatment unclear",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Macros are for the whole batch, not a stated serving; parmesan and spray oil treatment are also variable.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Macros are for the whole batch, not a stated serving; parmesan and spray oil treatment are also variable."
+  },
+  {
+    "id": "recipe-high-protein-tomato-soup",
+    "title": "High-Protein Tomato Soup 🍅",
+    "file": "recipe-high-protein-tomato-soup.md",
+    "source_path": "src/content/recipes/recipe-high-protein-tomato-soup.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 558,
+        "protein": 43,
+        "carbs": 47,
+        "fat": 20
+      },
+      "servings": null,
+      "serving_basis": "whole batch; source says 1-2 servings",
+      "variant": "recipe as written",
+      "stated_as_approximate": true
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Macros are for the whole batch and the source permits either one or two servings.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Macros are for the whole batch and the source permits either one or two servings."
+  },
+  {
+    "id": "recipe-hotcakes-de-proteina-queso-cottage",
+    "title": "Hotcakes de Proteína (Queso Cottage)",
+    "file": "recipe-hotcakes-de-proteina-queso-cottage.md",
+    "source_path": "src/content/recipes/recipe-hotcakes-de-proteina-queso-cottage.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "no complete macro statement",
+      "candidate": null
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "no source-provided complete macros; no calculated estimate",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Yield is a 3-or-6 piece range; cooking oil and toppings are unspecified.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Yield is a 3-or-6 piece range; cooking oil and toppings are unspecified."
+  },
+  {
+    "id": "recipe-mcchicken-smash-tacos",
+    "title": "McChicken Smash Tacos",
+    "file": "recipe-mcchicken-smash-tacos.md",
+    "source_path": "src/content/recipes/recipe-mcchicken-smash-tacos.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 198,
+        "protein": 16,
+        "carbs": 16,
+        "fat": 7
+      },
+      "servings": 8,
+      "serving_basis": "per taco",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 8,
+      "calories": 198,
+      "protein": 16,
+      "carbs": 16,
+      "fat": 7
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-my-protein-pancakes",
+    "title": "MY PROTEIN PANCAKES",
+    "file": "recipe-my-protein-pancakes.md",
+    "source_path": "src/content/recipes/recipe-my-protein-pancakes.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 399,
+        "protein": 45.5,
+        "carbs": 28.7,
+        "fat": 10
+      },
+      "servings": null,
+      "serving_basis": "recipe amount; yield not stated",
+      "variant": "without toppings",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Macros are for the recipe amount, but no yield or serving count is stated.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Macros are for the recipe amount, but no yield or serving count is stated."
+  },
+  {
+    "id": "recipe-pepperoni-pizza-hot-pockets",
+    "title": "Pepperoni Pizza Hot Pockets",
+    "file": "recipe-pepperoni-pizza-hot-pockets.md",
+    "source_path": "src/content/recipes/recipe-pepperoni-pizza-hot-pockets.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 350,
+        "protein": 40,
+        "carbs": 38,
+        "fat": 4
+      },
+      "servings": 10,
+      "serving_basis": "per hot pocket",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 10,
+      "calories": 350,
+      "protein": 40,
+      "carbs": 38,
+      "fat": 4
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-protein-chocolate-lava-cake",
+    "title": "Protein Chocolate Lava Cake",
+    "file": "recipe-protein-chocolate-lava-cake.md",
+    "source_path": "src/content/recipes/recipe-protein-chocolate-lava-cake.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 260,
+        "protein": 34,
+        "carbs": 17,
+        "fat": 8
+      },
+      "servings": null,
+      "serving_basis": "serving basis not stated",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "The source does not state whether macros are for one cake or the batch.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "The source does not state whether macros are for one cake or the batch."
+  },
+  {
+    "id": "recipe-protein-coffee-cake",
+    "title": "Protein Coffee Cake",
+    "file": "recipe-protein-coffee-cake.md",
+    "source_path": "src/content/recipes/recipe-protein-coffee-cake.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": 216,
+      "protein": 46,
+      "carbs": 3,
+      "fat": 1
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 216,
+        "protein": 46,
+        "carbs": 3,
+        "fat": 1
+      },
+      "servings": null,
+      "serving_basis": "per batch; yield not stated",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Macros are for the batch, but the yield is not stated.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Macros are for the batch, but the yield is not stated."
+  },
+  {
+    "id": "recipe-protein-passionfruit-cheesecake-bowl",
+    "title": "Protein Passionfruit Cheesecake Bowl",
+    "file": "recipe-protein-passionfruit-cheesecake-bowl.md",
+    "source_path": "src/content/recipes/recipe-protein-passionfruit-cheesecake-bowl.md",
+    "source_provided_metadata": {
+      "servings": 1,
+      "calories": 209,
+      "protein": 17,
+      "carbs": 23,
+      "fat": 3
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 209,
+        "protein": 17,
+        "carbs": 23,
+        "fat": 3
+      },
+      "servings": 1,
+      "serving_basis": "per portion",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 1,
+      "calories": 209,
+      "protein": 17,
+      "carbs": 23,
+      "fat": 3
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-rice-noodle-stir-fry",
+    "title": "Rice Noodle Stir-Fry",
+    "file": "recipe-rice-noodle-stir-fry.md",
+    "source_path": "src/content/recipes/recipe-rice-noodle-stir-fry.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 460,
+        "protein": 43,
+        "carbs": 60,
+        "fat": 3
+      },
+      "servings": 1,
+      "serving_basis": "per serve",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 1,
+      "calories": 460,
+      "protein": 43,
+      "carbs": 60,
+      "fat": 3
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-super-fck-protein-brownies",
+    "title": "Super Fck Protein Brownies",
+    "file": "recipe-super-fck-protein-brownies.md",
+    "source_path": "src/content/recipes/recipe-super-fck-protein-brownies.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "complete",
+      "macros": {
+        "calories": 99,
+        "protein": 11,
+        "carbs": 8,
+        "fat": 2
+      },
+      "servings": 9,
+      "serving_basis": "per brownie",
+      "variant": "recipe as written",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": {
+      "servings": 9,
+      "calories": 99,
+      "protein": 11,
+      "carbs": 8,
+      "fat": 2
+    },
+    "basis": "source_provided",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "high",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Complete source-provided values and a single serving basis; no calculation performed.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": true,
+    "review_note": "Complete source-provided values and a single serving basis; no calculation performed."
+  },
+  {
+    "id": "recipe-the-french-toast-cloud",
+    "title": "The French Toast Cloud",
+    "file": "recipe-the-french-toast-cloud.md",
+    "source_path": "src/content/recipes/recipe-the-french-toast-cloud.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 280,
+        "protein": 25,
+        "carbs": 27,
+        "fat": 7
+      },
+      "servings": null,
+      "serving_basis": "per serving; yield not stated",
+      "variant": "optional toppings excluded",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Macros are per serving, but the source does not state how many servings the recipe yields.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Macros are per serving, but the source does not state how many servings the recipe yields."
+  },
+  {
+    "id": "recipe-torta-de-zanahoria-prueba-1",
+    "title": "Torta de Zanahoria - Prueba 1",
+    "file": "recipe-torta-de-zanahoria-prueba-1.md",
+    "source_path": "src/content/recipes/recipe-torta-de-zanahoria-prueba-1.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "partial_or_ambiguous",
+      "macros": {
+        "calories": 493,
+        "protein": 8.2,
+        "carbs": 50.6,
+        "fat": 28.8
+      },
+      "servings": null,
+      "serving_basis": "per portion; source gives mutually exclusive 8- and 10-portion options",
+      "variant": "8-portion option",
+      "stated_as_approximate": false
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "source-provided recipe body; not independently calculated",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "The source provides mutually exclusive 8- and 10-portion macro options.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "The source provides mutually exclusive 8- and 10-portion macro options."
+  },
+  {
+    "id": "recipe-tres-huevazos-leche-en-polvo-pancito-saludable",
+    "title": "Pan Proteico de Huevo y Leche en Polvo",
+    "file": "recipe-tres-huevazos-leche-en-polvo-pancito-saludable.md",
+    "source_path": "src/content/recipes/recipe-tres-huevazos-leche-en-polvo-pancito-saludable.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "no complete macro statement",
+      "candidate": null
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "no source-provided complete macros; no calculated estimate",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Serving yield is stated as one large item or several small items; sesame quantity is unspecified.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Serving yield is stated as one large item or several small items; sesame quantity is unspecified."
+  },
+  {
+    "id": "recipe-tzatziki-e-naan",
+    "title": "Tzatziki e Naan",
+    "file": "recipe-tzatziki-e-naan.md",
+    "source_path": "src/content/recipes/recipe-tzatziki-e-naan.md",
+    "source_provided_metadata": {
+      "servings": null,
+      "calories": null,
+      "protein": null,
+      "carbs": null,
+      "fat": null
+    },
+    "source_provided_body": {
+      "status": "no complete macro statement",
+      "candidate": null
+    },
+    "proposed_metadata": null,
+    "basis": "insufficient_confidence",
+    "provenance": "no source-provided complete macros; no calculated estimate",
+    "confidence": "insufficient",
+    "assumptions": [],
+    "calculated_estimate": {
+      "status": "not_calculated",
+      "reason": "Naan yield does not define servings for the combined naan and tzatziki dish; cucumber sizes and dill quantity are unspecified.",
+      "assumptions": [],
+      "references": []
+    },
+    "safe_to_apply": false,
+    "review_note": "Naan yield does not define servings for the combined naan and tzatziki dish; cucumber sizes and dill quantity are unspecified."
+  }
+]

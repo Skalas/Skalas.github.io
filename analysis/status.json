@@ -1,0 +1,29 @@
+{
+  "phase": "scripts",
+  "status": "complete",
+  "source_files": [
+    "analysis/data/recipes.json"
+  ],
+  "translated_files": [
+    "analysis/data/recipes.json"
+  ],
+  "completed_scripts": [
+    "01_profile.py",
+    "02_nutrition_audit.py",
+    "03_validate_audit.py"
+  ],
+  "pending_scripts": [],
+  "last_run": "2026-07-21T16:43:53-06:00",
+  "outputs": {
+    "profile": "analysis/outputs/profile.md",
+    "nutrition_audit_json": "analysis/outputs/nutrition_audit.json",
+    "nutrition_audit_report": "analysis/outputs/nutrition_audit.md",
+    "validation": "analysis/outputs/validation.md"
+  },
+  "summary": {
+    "recipes_audited": 29,
+    "safe_source_provided_proposals": 14,
+    "held_for_clarification": 15,
+    "calculated_estimates": 0
+  }
+}

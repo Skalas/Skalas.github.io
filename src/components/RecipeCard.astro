@@ -1,0 +1,90 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { recipePath } from '../lib/recipes';
+
+interface Props {
+  recipe: CollectionEntry<'recipes'>;
+}
+
+const { recipe } = Astro.props;
+const { data } = recipe;
+const searchableText = [
+  data.title,
+  data.description,
+  data.creator,
+  data.source,
+  ...data.tags,
+  recipe.body,
+]
+  .filter(Boolean)
+  .join(' ')
+  .toLocaleLowerCase();
+const visibleTags = data.tags.slice(0, 3);
+const hasNutrition = data.protein || data.calories;
+const hasDirectSource = data.originType === 'recipe' && Boolean(data.originUrl);
+---
+
+<li
+  class="recipe-card group"
+  data-recipe-card
+  data-search={searchableText}
+  data-tags={data.tags.join('|')}
+>
+  <article class="flex h-full flex-col">
+    <div class="flex items-start justify-between gap-5">
+      <p class="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[color:var(--text-muted)]">
+        Kitchen note
+      </p>
+      {hasNutrition && (
+        <div class="shrink-0 text-right" aria-label="Nutrition summary">
+          {data.protein && (
+            <p class="font-display text-2xl leading-none text-[color:var(--text)]">
+              {data.protein}<span class="ml-0.5 font-sans text-xs text-[color:var(--text-muted)]">g</span>
+            </p>
+          )}
+          <p class="mt-1 text-[0.65rem] uppercase tracking-[0.12em] text-[color:var(--text-muted)]">
+            {data.protein
+              ? `${data.nutritionBasis === 'source_provided_approximate' ? 'approx. ' : ''}protein`
+              : `${data.calories} kcal`}
+          </p>
+        </div>
+      )}
+    </div>
+
+    <a href={recipePath(recipe.id)} class="mt-8 no-underline">
+      <h2 class="font-serif text-2xl font-semibold leading-tight text-[color:var(--text)] transition-colors duration-200 group-hover:text-[color:var(--link)]">
+        {data.title}
+        <span aria-hidden="true" class="ml-1 inline-block -translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">→</span>
+      </h2>
+    </a>
+    <p class="mt-3 line-clamp-3 font-serif leading-relaxed text-[color:var(--text-muted)]">
+      {data.description}
+    </p>
+
+    <div class="mt-auto pt-8">
+      {visibleTags.length > 0 && (
+        <ul class="mb-5 flex flex-wrap gap-2" aria-label="Recipe categories">
+          {visibleTags.map((tag) => <li class="recipe-tag">{tag.replaceAll('-', ' ')}</li>)}
+        </ul>
+      )}
+
+      <div class="flex min-h-6 items-center justify-between gap-4 border-t border-[color:var(--border)] pt-4 text-xs text-[color:var(--text-muted)]">
+        <span>{data.totalTime ? `${data.totalTime}` : data.source ?? 'Personal recipe'}</span>
+        {hasDirectSource && (
+          <a
+            href={data.originUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 no-underline hover:text-[color:var(--link)]"
+            aria-label={`View original recipe for ${data.title} (opens in a new tab)`}
+          >
+            Original
+            <svg aria-hidden="true" viewBox="0 0 16 16" class="h-3.5 w-3.5 fill-none stroke-current" stroke-width="1.5">
+              <path d="M5.25 3.25h7.5v7.5M12.5 3.5l-9 9" />
+            </svg>
+          </a>
+        )}
+      </div>
+    </div>
+  </article>
+</li>

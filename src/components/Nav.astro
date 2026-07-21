@@ -17,12 +17,14 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
       {SITE.title}
     </a>
 
-    <ul class="flex items-center gap-6 text-sm">
+    <ul class="flex items-center gap-3 text-xs sm:gap-6 sm:text-sm">
       {
         NAV.map(({ href, label }) => {
           const normalized = href.replace(/\/$/, '') || '/';
           const isActive =
-            normalized === '/' ? path === '/' : path === normalized;
+            normalized === '/'
+              ? path === '/'
+              : path === normalized || path.startsWith(`${normalized}/`);
           return (
             <li>
               <a

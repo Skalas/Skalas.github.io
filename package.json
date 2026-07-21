@@ -9,13 +9,16 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "recipes:sync": "node scripts/sync-recipes.mjs",
+    "recipes:nutrition": "node scripts/apply-nutrition-audit.mjs"
   },
   "dependencies": {
-    "astro": "^7.1.3",
     "@astrojs/mdx": "^7.0.3",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
-    "@astrojs/rss": "^4.0.19"
+    "astro": "^7.1.3",
+    "js-yaml": "^4.3.0"
   },
   "overrides": {
     "fast-xml-builder": "^1.2.0",
@@ -24,10 +27,10 @@
     "js-yaml": "^4.1.2"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.2.2",
     "@tailwindcss/typography": "^0.5.19",
-    "tailwindcss": "^4.2.2",
+    "@tailwindcss/vite": "^4.2.2",
     "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.2",
     "typescript": "^5.6.3"
   }
 }

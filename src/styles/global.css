@@ -205,6 +205,170 @@
   .timeline-entry:hover::before {
     background: var(--link);
   }
+
+  .recipes-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .recipe-search {
+    width: 100%;
+    min-height: 3.25rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    color: var(--text);
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    font-size: 1rem;
+    transition: border-color 180ms ease-out, box-shadow 180ms ease-out;
+  }
+  .recipe-search::placeholder {
+    color: var(--text-muted);
+  }
+  .recipe-search:focus {
+    border-color: var(--link);
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--link) 18%, transparent);
+  }
+
+  .recipe-filter {
+    min-height: 2.75rem;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--text-muted);
+    padding: 0.55rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    transition: border-color 180ms ease-out, background-color 180ms ease-out, color 180ms ease-out;
+  }
+  .recipe-filter:hover {
+    border-color: var(--link);
+    color: var(--link);
+  }
+  .recipe-filter[aria-pressed="true"] {
+    border-color: var(--text);
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .recipe-card {
+    min-width: 0;
+    border: 1px solid var(--border);
+    border-radius: 0.9rem;
+    background: var(--surface);
+    padding: 1.5rem;
+    transition: border-color 220ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out;
+  }
+  .recipe-card:hover {
+    border-color: color-mix(in srgb, var(--link) 55%, var(--border));
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px color-mix(in srgb, var(--color-ink-950) 8%, transparent);
+  }
+  .recipe-card[hidden] {
+    display: none;
+  }
+  .recipe-tag {
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 0.22rem 0.55rem;
+    font-size: 0.65rem;
+    line-height: 1.2;
+    text-transform: capitalize;
+    color: var(--text-muted);
+  }
+  .recipe-empty {
+    border: 1px dashed var(--border);
+    border-radius: 0.9rem;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .recipe-origin {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-block: 2.5rem 3rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    padding: 1.25rem;
+  }
+  .origin-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    background: var(--text);
+    color: var(--bg);
+    padding: 0.65rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 180ms ease-out, transform 180ms ease-out;
+  }
+  .origin-link:hover {
+    color: var(--bg);
+    opacity: 0.85;
+    transform: translateY(-1px);
+  }
+
+  .recipe-prose {
+    font-family: var(--font-serif);
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+  .recipe-prose :where(h2, h3) {
+    font-family: var(--font-sans);
+    letter-spacing: -0.02em;
+  }
+  .recipe-prose :where(h2) {
+    margin-top: 2.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+  .recipe-prose :where(li)::marker {
+    color: var(--link);
+  }
+
+  @media (min-width: 40rem) {
+    .recipe-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .recipe-origin {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .recipe-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 39.999rem) {
+    .recipes-toolbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+    .recipe-card {
+      padding: 1.25rem;
+    }
+  }
 }
 
 @layer utilities {

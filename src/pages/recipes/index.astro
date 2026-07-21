@@ -1,0 +1,141 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+
+const recipes = (await getCollection('recipes')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title),
+);
+const preferredFilters = [
+  ['high-protein', 'High protein'],
+  ['easy', 'Easy'],
+  ['dessert', 'Dessert'],
+  ['dinner', 'Dinner'],
+  ['low-carb', 'Low carb'],
+  ['meal-prep', 'Meal prep'],
+] as const;
+const availableTags = new Set(recipes.flatMap(({ data }) => data.tags));
+const filters = preferredFilters.filter(([value]) => availableTags.has(value));
+---
+
+<BaseLayout
+  title="Recipes"
+  description="A searchable collection of recipes from Miguel Escalante's personal kitchen notebook, with links back to their original creators."
+>
+  <section class="container-wide pb-10 pt-20 md:pb-14 md:pt-28">
+    <div class="grid gap-8 border-b border-[color:var(--border)] pb-12 md:grid-cols-[1fr_22rem] md:items-end md:pb-16">
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
+          From the second brain
+        </p>
+        <h1 class="mt-5 max-w-3xl font-display text-5xl font-bold tracking-[-0.04em] text-[color:var(--text)] sm:text-6xl md:text-7xl">
+          Kitchen notes.
+        </h1>
+      </div>
+      <p class="max-w-md font-serif text-lg leading-relaxed text-[color:var(--text-muted)]">
+        Recipes worth keeping, gathered in one place. Search by ingredient or mood, and follow the source when one is available.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-wide" aria-labelledby="recipe-archive-title">
+    <div class="recipes-toolbar">
+      <div class="relative min-w-0 flex-1">
+        <label for="recipe-search" class="sr-only">Search recipes</label>
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 fill-none stroke-[color:var(--text-muted)]" stroke-width="1.7">
+          <circle cx="11" cy="11" r="6.5" />
+          <path d="m16 16 4 4" />
+        </svg>
+        <input
+          id="recipe-search"
+          type="search"
+          inputmode="search"
+          autocomplete="off"
+          placeholder="Search recipes or ingredients…"
+          class="recipe-search"
+          data-recipe-search
+        />
+      </div>
+      <p class="shrink-0 font-mono text-xs uppercase tracking-[0.14em] text-[color:var(--text-muted)]" aria-live="polite" data-result-count>
+        {recipes.length} recipes
+      </p>
+    </div>
+
+    <div class="mb-10 flex flex-wrap gap-2" aria-label="Filter recipes">
+      <button type="button" class="recipe-filter" data-recipe-filter="all" aria-pressed="true">All</button>
+      {filters.map(([value, label]) => (
+        <button type="button" class="recipe-filter" data-recipe-filter={value} aria-pressed="false">{label}</button>
+      ))}
+    </div>
+
+    <h2 id="recipe-archive-title" class="sr-only">Recipe archive</h2>
+    <ol class="recipe-grid" data-recipe-grid>
+      {recipes.map((recipe) => <RecipeCard recipe={recipe} />)}
+    </ol>
+
+    <div class="recipe-empty" hidden data-empty-state>
+      <p class="font-display text-3xl font-semibold text-[color:var(--text)]">Nothing on that shelf.</p>
+      <p class="mt-3 font-serif text-lg text-[color:var(--text-muted)]">Try a broader search or clear the active filter.</p>
+      <button type="button" class="mt-6 recipe-filter" data-clear-recipes>Show all recipes</button>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const search = document.querySelector<HTMLInputElement>('[data-recipe-search]');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-recipe-card]')];
+  const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-recipe-filter]')];
+  const count = document.querySelector<HTMLElement>('[data-result-count]');
+  const emptyState = document.querySelector<HTMLElement>('[data-empty-state]');
+  const clearButton = document.querySelector<HTMLButtonElement>('[data-clear-recipes]');
+  let activeFilter = 'all';
+
+  const normalize = (value: string) =>
+    value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase().trim();
+
+  const updateRecipes = () => {
+    const query = normalize(search?.value ?? '');
+    let visible = 0;
+
+    cards.forEach((card) => {
+      const haystack = normalize(card.dataset.search ?? '');
+      const tags = (card.dataset.tags ?? '').split('|');
+      const matchesSearch = !query || haystack.includes(query);
+      const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+      card.hidden = !(matchesSearch && matchesFilter);
+      if (!card.hidden) visible += 1;
+    });
+
+    if (count) count.textContent = `${visible} ${visible === 1 ? 'recipe' : 'recipes'}`;
+    if (emptyState) emptyState.hidden = visible !== 0;
+
+    const params = new URLSearchParams();
+    if (query) params.set('q', search?.value.trim() ?? '');
+    if (activeFilter !== 'all') params.set('filter', activeFilter);
+    const suffix = params.size ? `?${params}` : window.location.pathname;
+    window.history.replaceState({}, '', suffix);
+  };
+
+  const chooseFilter = (value: string) => {
+    activeFilter = value;
+    filters.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.recipeFilter === value));
+    });
+    updateRecipes();
+  };
+
+  search?.addEventListener('input', updateRecipes);
+  filters.forEach((button) =>
+    button.addEventListener('click', () => chooseFilter(button.dataset.recipeFilter ?? 'all')),
+  );
+  clearButton?.addEventListener('click', () => {
+    if (search) search.value = '';
+    chooseFilter('all');
+    search?.focus();
+  });
+
+  const initialParams = new URLSearchParams(window.location.search);
+  const initialFilter = initialParams.get('filter');
+  if (search) search.value = initialParams.get('q') ?? '';
+  chooseFilter(filters.some((button) => button.dataset.recipeFilter === initialFilter) ? initialFilter! : 'all');
+</script>
