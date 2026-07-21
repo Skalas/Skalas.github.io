@@ -53,7 +53,6 @@ export default defineConfig({
   },
   redirects: {
     '/devops/2015/10/15/docker': '/juay-the-docker',
-    '/devops/2015/10/15/docker/': '/juay-the-docker',
   },
   image: {
     responsiveStyles: true,
