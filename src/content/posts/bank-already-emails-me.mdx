@@ -1,12 +1,12 @@
 ---
 title: "The Bank Already Emails Me Every Transaction"
-description: "I never connected my accounts to a finance app. The bank emails every charge, so I parse those into local SQLite and nothing ever leaves my disk. Here's the blueprint."
-date: 2026-06-26
+description: "I never connected my accounts to a finance app. The bank emails every charge, so I parse those into local SQLite and nothing ever reaches a third party. Here's the blueprint."
+date: 2026-07-30
 category: Automating
 tags: [automation, python, sqlite, finance, cli]
 hero: ../../assets/heroes/post-bg-03.jpg
 heroAlt: "Abstract data pattern"
-draft: true
+draft: false
 ---
 
 import Aside from '../../components/Aside.astro';
@@ -17,20 +17,20 @@ Personal finance tools sell you a false choice. Connect your real accounts to a 
 
 You don't have to pick. The bank already pushes the data to you, one email per transaction. Parse it locally and the dilemma disappears.
 
-What follows is the blueprint, not a repo. Every piece is small, and only one of them is specific to your bank.
+Every piece of what follows is small, only one of them is specific to your bank, and the part I'd steal first isn't the parsing — it's that every judgment call gets compiled into a rule once instead of re-decided every month.
 
 ## The shape
 
-Four moving parts, no daemon, no cloud call:
+Two scripts, one database, no daemon:
 
 ```
 [Bank email] → (IMAP client + Keychain) → [Python parser] → [SQLite: finance.db]
-                                                                   │
-                                                                   ▼
+                                                 ↑                 │
+                                          [rules.json]             ▼
 [cron] ─────────────────────────────────────────────────→ [SQL reports]
 ```
 
-Each piece does one thing. Nothing runs in the background eating RAM, and nothing phones home.
+Each piece does one thing. Nothing runs in the background eating RAM, and no third party ever sees an account of mine — the only network call in the pipeline is my own mail server.
 
 ## The bank is the API
 
@@ -50,54 +50,92 @@ cmd = ["himalaya", "envelope", "list", "--folder", FOLDER,
 ```
 
 <Aside>
-  Filter against *All Mail*, not the inbox. Gmail's own rules quietly move the bank alert to a label before your script runs, and a transaction that isn't in the inbox is a transaction you never log — you find out weeks later when a category is wrong. Point the query at `[Gmail]/Todos` and filter server-side.
+  A bug I caught in the first week: my own Gmail filters were labelling the bank alerts and pulling them out of the inbox before the script ever ran, so it quietly missed them. Search *All Mail* instead. Nobody else has my filters, but everybody has some.
+</Aside>
+
+It doesn't ask for everything, either. A JSON file next to the script holds one field — when the last run finished — and each pass asks for a week back, or three days before that timestamp when it's more recent. Write it after the commit, never before, and a run that dies just gets covered by the next one. There's no retry logic in this thing. The overlap is the retry logic.
+
+## The table
+
+The first version wrote to a CSV and it worked fine. I moved because every question I wanted to ask cost me another script, and querying is a database's whole job.
+
+```sql
+CREATE TABLE IF NOT EXISTS transactions (
+    msg_id        TEXT PRIMARY KEY,   -- NULL for rows you type in; SQLite allows
+                                      -- many NULLs here, so those lean entirely
+                                      -- on the signature below
+    date          TEXT NOT NULL,
+    time          TEXT NOT NULL,
+    merchant      TEXT NOT NULL,
+    amount        REAL NOT NULL,      -- integer cents is the correct answer;
+                                      -- this is a compromise I'd undo for anyone
+                                      -- else's money
+    currency      TEXT DEFAULT 'USD', -- comes out of the alert; sum per currency
+    category      TEXT DEFAULT 'Uncategorized',
+    status        TEXT DEFAULT 'Auto',   -- rule-assigned, or corrected by me
+    source        TEXT DEFAULT 'Email',  -- mailbox, or my own hands
+    original_text TEXT                -- raw snippet, for audits
+);
+
+CREATE INDEX IF NOT EXISTS idx_date_category ON transactions (date, category);
+```
+
+`status` and `source` look like clutter until the first time a number is wrong, and then they're the difference between chasing a parser bug and chasing a typo. What the schema doesn't handle is refunds: a reversal arrives as its own alert and lands as a positive row like everything else, so a return inflates the category it should be cancelling. Pick a sign convention before you have three of them.
+
+## Killing duplicates
+
+Overlapping windows mean the same email arrives several times. That has to be a non-event.
+
+The message id handles anything that came from the mailbox. Rows you type in by hand don't have one, so they get a second key built from the fields that identify a charge — formatted, because `12.5` and `12.50` are the same charge and two different strings:
+
+```python
+sig = f"{date}_{time}_{merchant}_{amount:.2f}"
+```
+
+Keep the time in there. Mine didn't: it signed on date, merchant, and amount alone, which quietly asserts you never buy the same thing at the same place twice in one day. Two identical coffees on a Saturday and the second one was dropped, silently, forever. The transaction that goes missing looks exactly like the duplicate you were trying to kill.
+
+<Aside>
+  That's the reason this post was worth writing. The bug had been running for months and I found it here, on this page, trying to explain the design to someone who couldn't see the code. The time was already parsed and already stored — it just never made it into the signature. Writing it down is a code review you can't argue your way out of.
 </Aside>
 
 ## Parsing emails that have accents
 
-This is where most naive versions break, and where I lost the most time.
+One bank, one card, five layouts, none of them announced: an HTML table, that table collapsed onto one line, a multi-line block, a key-value list, and a plain sentence — "Compró en X por Y." So the parser is a list of matchers tried in order, first hit wins, and a new format means one more function in the list. Tedious, not hard.
 
-Bank alerts come in more shapes than you'd expect: a key-value block, a sideways HTML table, a plain sentence — "Compró en X por Y." My parser tries each in turn and returns the first that matches. That part is tedious but not hard.
-
-The subtle bug is the character class. Merchant names in my part of the world are full of accents and `ñ`, and the reflex pattern truncates them:
+The character class is the part that bit me. Merchant names here are full of accents and `ñ`, and the reflex pattern truncates them:
 
 ```python
 # Wrong: silently drops the accented tail of "Almacén González"
 re.search(r"Comercio:\s*([A-Za-z0-9 ]+)", text)
 ```
 
-You don't get an error. You get "Almac" in your database and a category that's quietly wrong for a month. The fix is to spell out the full Latin set:
+No error. You get "Almac" in your database and a category that's quietly wrong for a month. Spell out the characters your bank actually sends — mine never produces a `ç`, so mine doesn't have one, and you'll find yours the same way I did:
 
 ```python
 r"[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ\s\.\*\-\&]"
 ```
 
-The same trap waits one layer up, in the categories. `Café` and `Cafe` are two rows to SQLite, so your coffee spend splits in half across two buckets and every total lies. Normalize the category names the same way you normalize the merchants, once, before anything gets written.
+The same trap waits one layer up: `Café` and `Cafe` are two rows to SQLite, so your coffee spend splits across two buckets and every total lies.
 
-## SQLite, not CSV
+## The LLM proposes, you decide
 
-The first version wrote to a CSV. CSV is a bad database pretending to be a file — no atomicity, no real concurrency, and if the process dies mid-write you get a corrupted line and a bad afternoon. Sorting and deduping happened in Python, in memory, every run.
+Something has to turn `PEDIDOSYA*RESTOCK MEGA` into "Groceries." The obvious move in 2026 is to send every transaction to a model and let it pick. Don't. That's a network call per charge, forever, for a question you only have to answer once per merchant.
 
-A local SQLite file handles all of that for you:
+Assignment is a regex table loaded from a JSON file:
 
-```sql
-CREATE TABLE IF NOT EXISTS transactions (
-    msg_id        TEXT PRIMARY KEY,   -- email message id
-    date          TEXT NOT NULL,
-    time          TEXT NOT NULL,
-    merchant      TEXT NOT NULL,
-    amount        REAL NOT NULL,
-    currency      TEXT DEFAULT 'USD',
-    category      TEXT DEFAULT 'Uncategorized',
-    original_text TEXT                -- raw snippet, for audits
-);
+```json
+{ "(?i)PEDIDOSYA\\*RESTOCK": "Groceries" }
 ```
 
-## Killing duplicates with a hash
+Merchant matches a pattern, row gets the category, done — offline, deterministic, free. Anything that doesn't match lands as `Uncategorized`, which is the point rather than a failure: it's a work queue.
 
-The email message id is a fine primary key when every transaction comes from an email. But some don't — a manual entry, an old row from those legacy CSVs. Those have no message id and would double up.
+The model works that queue, not the write path. When it's grown enough to be worth a pass, it groups the uncategorized by merchant, sorts by how much money is sitting in each, and hands me fifteen or twenty with a proposed category apiece. I approve, correct, or skip; approvals become one line each in the rules file. Nothing is written without me saying so — a model that can silently rewrite its own classification rules can quietly reshape a year of history.
 
-So I build the key myself: a SHA-256 over the fields that can't change — date, time, merchant, amount. Same transaction, same hash, every time. Then `INSERT OR IGNORE` lets SQLite drop the duplicate at write time, and I never write a read-compare-write loop to catch it.
+So it's a suggestion engine for rules, not a classifier. It's wrong often enough that the approval step earns its keep, and once it's right it stays right, which is not something you can say about asking a model the same question every month.
+
+That's also the honest edge of the privacy story: the transactions never leave the disk, but the merchant names I send for review do reach a model — names only, no amounts, no dates, no account. It's the one step here with a drop-in local replacement, and the rules file comes out identical either way.
+
+Two things I got wrong writing those rules. The first: match the brand, not the branch. A pattern built around the store you happen to shop at breaks the first time you visit a different location of the same chain, and the transaction silently falls back to `Uncategorized`, so you end up hand-feeding the same merchant forever. The second: on delivery platforms, the last name matters more than the first. Match `Platform\*` and every order collapses into one bucket — groceries, dinner, pharmacy, office supplies, indistinguishable. The real merchant is the sub-store after the asterisk. Anchor the pattern there and the money shows up where it was actually spent.
 
 ## Reports are just SQL
 
@@ -111,10 +149,10 @@ GROUP BY category
 ORDER BY total DESC;
 ```
 
-cron runs the parser, the parser feeds the database, and the database answers questions. The whole pass finishes in under two seconds, and not a byte of it leaves the disk.
+cron runs the parser, the parser feeds the database, and the database answers questions. The window bounds the work at a week of email no matter how many years are already in the file, so it finishes in seconds on a laptop and still will after a decade.
 
 ## Build your own
 
-The bank-specific part is one thing: the regex that reads your bank's email. Everything downstream — the Keychain trick, the schema, the dedup, the reports — is the same no matter who you bank with. Split those two and the parser is the only piece anyone has to swap.
+The bank-specific part is one thing: the regex that reads your bank's email. Most of what's downstream — the Keychain trick, the moving window, the dedup, the reports — travels unchanged. The schema is the exception, because refunds and pending charges and second currencies are all bank-shaped problems that can cost you a column. The rules file is yours alone, but that's data, not code.
 
 The order that worked for me: read one of your own alerts and write the parser first, point it at a throwaway `finance.db`, then wire up cron once the numbers look right. Your transaction history is worth more than the convenience you'd trade it for.
