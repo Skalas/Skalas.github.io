@@ -10,6 +10,7 @@ draft: false
 ---
 
 import Aside from '../../components/Aside.astro';
+import SharedBrainDiagram from '../../components/SharedBrainDiagram.astro';
 
 I keep two machines on: a laptop I carry, and a Mac Mini at home that never sleeps. Between them, four agents do real work for me every day. Two live on the laptop and write code. Two live on the Mini and answer on Telegram.
 
@@ -50,6 +51,8 @@ All four reach into one Obsidian vault. Plain markdown, my single source of trut
 They don't each re-implement how to read and write it. A small Python MCP server (`brain-mcp`) exposes the vault as a set of tools, and every agent that speaks MCP gets the same surface: search, read, append. Write the serving logic once, point every client at it.
 
 The two halves travel differently, and that turned out to matter:
+
+<SharedBrainDiagram />
 
 <Aside>
   Content by iCloud, tools by git. The vault (the notes themselves) syncs between machines over iCloud. `brain-mcp` (the code that serves them) lives in a git repo I pull. Edit a note and it's everywhere in seconds; touch git only on the rare day I change a tool.

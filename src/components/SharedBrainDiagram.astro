@@ -1,0 +1,266 @@
+---
+/**
+ * SharedBrainDiagram.astro
+ * Responsive SVG architectural diagram for "Four Agents and a Shared Brain".
+ * Uses root CSS tokens (--bg, --surface, --text, --text-muted, --border, --link).
+ */
+---
+
+<figure class="not-prose my-10">
+  <div class="overflow-hidden rounded-[2px] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 sm:p-6">
+    <svg
+      viewBox="0 0 760 232"
+      class="h-auto w-full"
+      role="img"
+      aria-labelledby="shared-brain-title shared-brain-desc"
+    >
+      <title id="shared-brain-title">Four agents reaching into one shared Obsidian vault via brain-mcp</title>
+      <desc id="shared-brain-desc">
+        Claude Code and Cursor on the laptop, plus Nico and Hermes on the always-on Mac Mini, all connect through the brain-mcp Python server (synced via Git) to read and append to a single Obsidian Markdown vault (synced via iCloud).
+      </desc>
+
+      <defs>
+        <marker
+          id="sb-arrow-ink"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--text-muted)" />
+        </marker>
+        <marker
+          id="sb-arrow-accent"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--link)" />
+        </marker>
+      </defs>
+
+      <!-- Left Column Top: Laptop Agents -->
+      <rect
+        x="16"
+        y="20"
+        width="216"
+        height="86"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+      />
+      <text
+        x="30"
+        y="42"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        LAPTOP · ON-DEMAND CODE
+      </text>
+      <text
+        x="30"
+        y="65"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="15"
+        font-weight="700"
+      >
+        Claude Code &amp; Cursor
+      </text>
+      <text
+        x="30"
+        y="86"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="11"
+      >
+        CLI + IDE engineering
+      </text>
+
+      <!-- Left Column Bottom: Mac Mini Agents -->
+      <rect
+        x="16"
+        y="126"
+        width="216"
+        height="86"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+      />
+      <text
+        x="30"
+        y="148"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        MAC MINI · ALWAYS AWAKE
+      </text>
+      <text
+        x="30"
+        y="171"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="15"
+        font-weight="700"
+      >
+        Nico &amp; Hermes
+      </text>
+      <text
+        x="30"
+        y="192"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="11"
+      >
+        Telegram + cron subagents
+      </text>
+
+      <!-- Connectors from Laptop & Mini -> brain-mcp -->
+      <path
+        d="M 232 63 L 268 63 L 268 104 L 298 104"
+        fill="none"
+        stroke="var(--text-muted)"
+        stroke-width="1.5"
+        marker-end="url(#sb-arrow-ink)"
+      />
+      <path
+        d="M 232 169 L 268 169 L 268 128 L 298 128"
+        fill="none"
+        stroke="var(--text-muted)"
+        stroke-width="1.5"
+        marker-end="url(#sb-arrow-ink)"
+      />
+
+      <!-- Center Node: brain-mcp -->
+      <rect
+        x="304"
+        y="68"
+        width="172"
+        height="96"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--link)"
+        stroke-width="1.5"
+      />
+      <line
+        x1="304"
+        y1="69.5"
+        x2="476"
+        y2="69.5"
+        stroke="var(--link)"
+        stroke-width="3"
+      />
+      <text
+        x="318"
+        y="92"
+        fill="var(--link)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        font-weight="500"
+        letter-spacing="0.08em"
+      >
+        TOOLS BY GIT
+      </text>
+      <text
+        x="318"
+        y="116"
+        fill="var(--text)"
+        font-family="var(--font-mono)"
+        font-size="15"
+        font-weight="500"
+      >
+        brain-mcp
+      </text>
+      <text
+        x="318"
+        y="138"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="11"
+      >
+        search · read · append
+      </text>
+
+      <!-- Arrow brain-mcp -> Obsidian Vault -->
+      <line
+        x1="476"
+        y1="116"
+        x2="526"
+        y2="116"
+        stroke="var(--link)"
+        stroke-width="1.5"
+        marker-end="url(#sb-arrow-accent)"
+      />
+
+      <!-- Right Node: Obsidian Vault -->
+      <rect
+        x="532"
+        y="52"
+        width="212"
+        height="128"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--link)"
+        stroke-width="1.5"
+      />
+      <line
+        x1="532"
+        y1="53.5"
+        x2="744"
+        y2="53.5"
+        stroke="var(--link)"
+        stroke-width="3"
+      />
+      <text
+        x="548"
+        y="78"
+        fill="var(--link)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        font-weight="500"
+        letter-spacing="0.08em"
+      >
+        CONTENT BY ICLOUD
+      </text>
+      <text
+        x="548"
+        y="104"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="16"
+        font-weight="700"
+      >
+        Obsidian Vault
+      </text>
+      <text
+        x="548"
+        y="128"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="11"
+      >
+        Plain Markdown SSOT
+      </text>
+      <text
+        x="548"
+        y="148"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="11"
+      >
+        Append-only agent sections
+      </text>
+    </svg>
+  </div>
+</figure>

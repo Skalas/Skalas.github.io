@@ -5,6 +5,14 @@ import { SITE } from '../consts';
 function stripMdxBoilerplate(raw: string): string {
   return raw
     .replace(/^import\s+[^\n]+\n+/gm, '')
+    .replace(
+      /<FinancePipelineDiagram\s*\/>/g,
+      'Pipeline: Bank email -> IMAP CLI (macOS Keychain) -> Python parser (with rules.json) -> SQLite (finance.db) -> SQL reports (triggered by cron).',
+    )
+    .replace(
+      /<SharedBrainDiagram\s*\/>/g,
+      'Topology: Laptop (Claude Code, Cursor) + Mac Mini (Nico, Hermes) -> brain-mcp (synced via Git) -> Obsidian Vault (synced via iCloud).',
+    )
     .replace(/<Aside[^>]*>/g, '\n> **Note:** ')
     .replace(/<\/Aside>/g, '\n')
     .trim();

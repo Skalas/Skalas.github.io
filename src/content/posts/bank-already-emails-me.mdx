@@ -10,6 +10,7 @@ draft: false
 ---
 
 import Aside from '../../components/Aside.astro';
+import FinancePipelineDiagram from '../../components/FinancePipelineDiagram.astro';
 
 My bank emails me every time I swipe a card. Amount, merchant, date, all of it, in my inbox before the receipt prints. For years I archived those as noise. They're the only API I need.
 
@@ -23,12 +24,7 @@ Every piece of what follows is small, only one of them is specific to your bank,
 
 Two scripts, one database, no daemon:
 
-```
-[Bank email] → (IMAP client + Keychain) → [Python parser] → [SQLite: finance.db]
-                                                 ↑                 │
-                                          [rules.json]             ▼
-[cron] ─────────────────────────────────────────────────→ [SQL reports]
-```
+<FinancePipelineDiagram />
 
 Each piece does one thing. Nothing runs in the background eating RAM, and no third party ever sees an account of mine. The only network call in the pipeline is my own mail server.
 

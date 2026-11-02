@@ -1,0 +1,359 @@
+---
+/**
+ * FinancePipelineDiagram.astro
+ * Responsive SVG architectural diagram for "The Bank Already Emails Me Every Transaction".
+ * Uses root CSS tokens (--bg, --surface, --text, --text-muted, --border, --link)
+ * so it adapts automatically between Light (Cal & Turquesa) and Dark (Recinto & Turquesa).
+ */
+---
+
+<figure class="not-prose my-10">
+  <div class="overflow-hidden rounded-[2px] border border-[color:var(--border)] bg-[color:var(--surface)] p-4 sm:p-6">
+    <svg
+      viewBox="0 0 760 220"
+      class="h-auto w-full"
+      role="img"
+      aria-labelledby="finance-diagram-title finance-diagram-desc"
+    >
+      <title id="finance-diagram-title">Local email-to-SQLite finance pipeline</title>
+      <desc id="finance-diagram-desc">
+        Bank alert emails are fetched via an IMAP CLI authenticated through macOS Keychain, parsed by a Python script using regex rules from rules.json, stored in a local SQLite database finance.db, and queried into SQL reports on a cron schedule.
+      </desc>
+
+      <defs>
+        <marker
+          id="arrow-ink"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--text-muted)" />
+        </marker>
+        <marker
+          id="arrow-accent"
+          viewBox="0 0 10 10"
+          refX="8"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="var(--link)" />
+        </marker>
+      </defs>
+
+      <!-- Top Row: Main Pipeline -->
+      <!-- Node 1: Bank Email -->
+      <rect
+        x="16"
+        y="24"
+        width="148"
+        height="64"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+      />
+      <text
+        x="30"
+        y="46"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        INBOX PUSH
+      </text>
+      <text
+        x="30"
+        y="68"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="15"
+        font-weight="700"
+      >
+        Bank email
+      </text>
+
+      <!-- Arrow 1 -> 2 -->
+      <line
+        x1="164"
+        y1="56"
+        x2="198"
+        y2="56"
+        stroke="var(--text-muted)"
+        stroke-width="1.5"
+        marker-end="url(#arrow-ink)"
+      />
+
+      <!-- Node 2: IMAP + Keychain -->
+      <rect
+        x="204"
+        y="24"
+        width="164"
+        height="64"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+      />
+      <text
+        x="218"
+        y="46"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        MACOS KEYCHAIN
+      </text>
+      <text
+        x="218"
+        y="68"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="15"
+        font-weight="700"
+      >
+        IMAP CLI fetch
+      </text>
+
+      <!-- Arrow 2 -> 3 -->
+      <line
+        x1="368"
+        y1="56"
+        x2="402"
+        y2="56"
+        stroke="var(--text-muted)"
+        stroke-width="1.5"
+        marker-end="url(#arrow-ink)"
+      />
+
+      <!-- Node 3: Python Parser (Highlighted with Turquoise top bar) -->
+      <rect
+        x="408"
+        y="24"
+        width="156"
+        height="64"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--link)"
+        stroke-width="1.5"
+      />
+      <line
+        x1="408"
+        y1="25.5"
+        x2="564"
+        y2="25.5"
+        stroke="var(--link)"
+        stroke-width="3"
+      />
+      <text
+        x="422"
+        y="47"
+        fill="var(--link)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        font-weight="500"
+        letter-spacing="0.08em"
+      >
+        REGEX + DEDUP
+      </text>
+      <text
+        x="422"
+        y="69"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="15"
+        font-weight="700"
+      >
+        Python parser
+      </text>
+
+      <!-- Arrow 3 -> 4 -->
+      <line
+        x1="564"
+        y1="56"
+        x2="598"
+        y2="56"
+        stroke="var(--link)"
+        stroke-width="1.5"
+        marker-end="url(#arrow-accent)"
+      />
+
+      <!-- Node 4: SQLite finance.db -->
+      <rect
+        x="604"
+        y="24"
+        width="140"
+        height="64"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--link)"
+        stroke-width="1.5"
+      />
+      <line
+        x1="604"
+        y1="25.5"
+        x2="744"
+        y2="25.5"
+        stroke="var(--link)"
+        stroke-width="3"
+      />
+      <text
+        x="618"
+        y="47"
+        fill="var(--link)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        font-weight="500"
+        letter-spacing="0.08em"
+      >
+        LOCAL SQLITE
+      </text>
+      <text
+        x="618"
+        y="69"
+        fill="var(--text)"
+        font-family="var(--font-mono)"
+        font-size="14"
+        font-weight="500"
+      >
+        finance.db
+      </text>
+
+      <!-- Bottom Row: cron, rules.json, SQL reports -->
+      <!-- Node 5: cron trigger -->
+      <rect
+        x="16"
+        y="136"
+        width="148"
+        height="56"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+        stroke-dasharray="4 3"
+      />
+      <text
+        x="30"
+        y="157"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        SCHEDULED RUN
+      </text>
+      <text
+        x="30"
+        y="177"
+        fill="var(--text)"
+        font-family="var(--font-mono)"
+        font-size="13"
+        font-weight="500"
+      >
+        cron (no daemon)
+      </text>
+
+      <!-- Dashed line from cron up to IMAP/Parser and right to SQL reports -->
+      <path
+        d="M 90 136 L 90 110 L 286 110 L 286 94"
+        fill="none"
+        stroke="var(--text-muted)"
+        stroke-width="1.25"
+        stroke-dasharray="4 3"
+        marker-end="url(#arrow-ink)"
+      />
+
+      <!-- Node 6: rules.json feeding Python parser -->
+      <rect
+        x="408"
+        y="136"
+        width="156"
+        height="56"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+      />
+      <text
+        x="422"
+        y="157"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        COMPILED REGEX
+      </text>
+      <text
+        x="422"
+        y="177"
+        fill="var(--text)"
+        font-family="var(--font-mono)"
+        font-size="13"
+        font-weight="500"
+      >
+        rules.json
+      </text>
+
+      <!-- Arrow rules.json -> Python parser -->
+      <line
+        x1="486"
+        y1="136"
+        x2="486"
+        y2="94"
+        stroke="var(--link)"
+        stroke-width="1.5"
+        marker-end="url(#arrow-accent)"
+      />
+
+      <!-- Arrow finance.db -> SQL reports -->
+      <line
+        x1="674"
+        y1="88"
+        x2="674"
+        y2="130"
+        stroke="var(--link)"
+        stroke-width="1.5"
+        marker-end="url(#arrow-accent)"
+      />
+
+      <!-- Node 7: SQL reports -->
+      <rect
+        x="604"
+        y="136"
+        width="140"
+        height="56"
+        rx="2"
+        fill="var(--bg)"
+        stroke="var(--border)"
+        stroke-width="1.5"
+      />
+      <text
+        x="618"
+        y="157"
+        fill="var(--text-muted)"
+        font-family="var(--font-mono)"
+        font-size="10"
+        letter-spacing="0.08em"
+      >
+        MONTHLY QUERY
+      </text>
+      <text
+        x="618"
+        y="177"
+        fill="var(--text)"
+        font-family="var(--font-display)"
+        font-size="15"
+        font-weight="700"
+      >
+        SQL reports
+      </text>
+    </svg>
+  </div>
+</figure>
