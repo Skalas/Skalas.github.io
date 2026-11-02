@@ -56,7 +56,7 @@ export const GET: APIRoute = () => {
     lines.push('Allow: /');
   }
   lines.push('');
-  lines.push('# AI / LLM crawlers — change to "Disallow: /" to opt out of any one');
+  lines.push('# AI / LLM crawlers: change to "Disallow: /" to opt out of any one');
   for (const bot of aiBots) {
     lines.push(`User-agent: ${bot}`);
     lines.push('Allow: /');

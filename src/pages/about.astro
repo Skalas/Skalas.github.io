@@ -1,6 +1,86 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import aboutBg from '../assets/heroes/about-bg.jpg';
+
+const roles = [
+  {
+    period: '2024–Present',
+    title: 'AI Lead Consultant',
+    org: 'Government of El Salvador',
+    summary:
+      'AI strategy and clinical systems for <strong>DoctorSV</strong>, national telemedicine: triage, pre-consult summaries, chronic-disease monitoring. Began on USAID and EU-funded 5G coverage work.',
+  },
+  {
+    period: '2022–2024',
+    title: 'Staff Software Engineer',
+    org: 'Kavak',
+    summary:
+      'Led the data engineering half of the pricing team after Kavak acquired OPI Analytics, owning the pipelines and cloud infrastructure behind vehicle pricing models in every market.',
+  },
+  {
+    period: '2018–2022',
+    title: 'Software Designer / AI Lead',
+    org: 'Globant',
+    summary:
+      'Led the Mexico AI team across medical imaging, legal NLP, and anomaly detection. Consulting taught me to diagnose an organization’s real constraints before learning its politics.',
+  },
+  {
+    period: '2016–2018',
+    title: 'Data Science Manager',
+    org: 'Cultura Colectiva',
+    summary:
+      'Built the data science and BI team from scratch. In September 2017 we paused normal work to build <strong>Verificado19s</strong>, a real-time civic verification platform for the Mexico City earthquake.',
+  },
+  {
+    period: '2016',
+    title: 'Data Science Lead · Data Lab',
+    org: 'Presidency of Mexico · Open Data Initiative',
+    summary:
+      'Centralized technical team inside the federal government: find the bottleneck, build the analytical pipeline, and ship cloud infrastructure across multiple ministries.',
+  },
+  {
+    period: '2015–2016',
+    title: 'Data Scientist / Data Engineer',
+    org: 'Globant · OPI Analytics',
+    summary:
+      'Discrete math optimization for Globant textile distribution: physical constraints, real money, no neural nets. At OPI, full-stack startup engineering and cloud ops from zero.',
+  },
+  {
+    period: '2010–2015',
+    title: 'Data Analyst',
+    org: 'Center for Emergency Attention and Citizen Protection (C4), Mexico City',
+    summary:
+      'Crime prediction and officer evaluations in Excel macros and Matlab. The math was easy; the job was a dispatch number a commander off an 18-hour shift could act on at 6:00 AM.',
+  },
+];
+
+const courses = [
+  'NoSQL for Data Science (M.Sc.)',
+  'Introduction to Programming for Data Science (M.Sc.)',
+  'Applied Analysis in Computational Mathematics',
+];
+
+const publications = [
+  {
+    year: '2019',
+    citation: 'Esquinca, Escalante et al. ',
+    title: 'Recomendaciones para Sociedad Civil',
+    venue: 'Google Play Store.',
+  },
+  {
+    year: '2016',
+    citation: 'Martinez, Escalante, Beguerisse-Díaz et al. ',
+    title: 'Understanding Human Behavior in Urban Spaces',
+    venue: 'IJWSR.',
+  },
+  {
+    year: '2013',
+    citation: 'Prieto, Escalante et al. ',
+    title: 'Análisis Criminal y Uso de Cámaras de Seguridad en la CDMX',
+    venue: 'Buenas Prácticas para el Análisis Delictual en América Latina.',
+  },
+];
 ---
 
 <BaseLayout
@@ -11,151 +91,87 @@ import aboutBg from '../assets/heroes/about-bg.jpg';
   imageHeight={aboutBg.height}
   imageAlt="Miguel Escalante · About"
 >
-  <div class="container-prose pb-16 pt-14 md:pt-20">
+  <div class="container-wide pb-16 pt-14 md:pt-20">
 
-    <header class="mb-14 border-b border-[color:var(--border)] pb-12">
+    <header class="mb-10 max-w-3xl">
       <p class="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]">
         ABOUT · MIGUEL ESCALANTE
       </p>
-      <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-[color:var(--text)] md:text-5xl">
+      <h1 class="mt-4 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-[color:var(--text)] md:text-5xl">
         What happens after the model runs.
       </h1>
 
-      <p class="mt-6 font-serif text-xl leading-relaxed text-[color:var(--text)]">
-        You rarely fail because a model lost two points of AUC. You fail because you ignored the human bottleneck downstream. I learned that rule in my first job out of university, building crime prediction models for the Mexico City police on Excel macros and Matlab. It held across federal open data, earthquake response, unicorn pricing pipelines, and national healthcare.
+      <p class="mt-6 max-w-[60ch] font-serif text-xl leading-relaxed text-[color:var(--text)]">
+        Projects rarely fail over two points of AUC. They fail when the human bottleneck downstream gets ignored. I learned that building crime prediction models for the Mexico City police, and it held through federal open data, earthquake response, pricing pipelines, and national healthcare.
       </p>
 
-      <p class="mt-4 font-serif text-lg leading-relaxed text-[color:var(--text-muted)]">
-        I build the model, ship the software, and wire it into the habits and constraints of the people who have to act on it. Currently leading AI strategy and clinical AI systems for the Government of El Salvador, based in San Salvador.
-      </p>
-
-      <p class="mt-4 font-serif text-lg leading-relaxed text-[color:var(--text-muted)]">
-        Applied Mathematics undergrad and Data Science M.Sc. at ITAM in Mexico City. I taught graduate courses there for four years while working full-time. <a href="/data-science-journey-2024/">Part 1</a> and <a href="/data-science-journey-part-2/">Part 2</a> of the career notes cover the longer version.
+      <p class="mt-4 max-w-[60ch] font-serif text-lg leading-relaxed text-[color:var(--text-muted)]">
+        Today I lead AI strategy and clinical AI systems for the Government of El Salvador. I studied Applied Mathematics (B.Sc.) and Data Science (M.Sc.) at ITAM, where I taught graduate courses for four years while working full-time. <a href="/data-science-journey-2024/">Part 1</a> and <a href="/data-science-journey-part-2/">Part 2</a> of the career notes cover the longer version.
       </p>
     </header>
 
-    <section class="mb-14">
-      <h2 class="mb-8 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
-        Career &amp; Systems Built
+    <figure class="mb-14">
+      <Image
+        src={aboutBg}
+        alt="A wooden pier with a thatched palapa at sunset"
+        widths={[640, 960, 1280, 1600, 1900]}
+        sizes="(max-width: 1280px) 100vw, 1280px"
+        class="aspect-[19/6] w-full rounded-[2px] border border-[color:var(--border)] object-cover"
+      />
+    </figure>
+
+    <section
+      class="grid gap-8 border-t border-[color:var(--border)] pt-12 md:grid-cols-[14rem_1fr] lg:grid-cols-[16rem_1fr]"
+      aria-labelledby="career-title"
+    >
+      <h2 id="career-title" class="font-display text-2xl font-bold tracking-tight text-[color:var(--text)]">
+        Career &amp; systems
       </h2>
 
-      <div class="timeline">
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2024 – Present</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">AI Lead Consultant</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Government of El Salvador</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            AI strategy and production clinical systems for <strong>DoctorSV</strong> (national telemedicine: triage, pre-consult symptom summaries, and chronic-disease monitoring), alongside education reform and public services. Started on 5G coverage optimization under USAID and EU-funded engagements. When a doctor has a patient on a video call, a slow or noisy model breaks trust in five minutes; the real work is finding which operational levers inside a public institution actually move.
-          </p>
-        </div>
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2022 – 2024</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">Staff Software Engineer</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Kavak</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            Led the data engineering half of the pricing team after Kavak acquired OPI Analytics. Owned the pipelines and cloud infrastructure feeding vehicle pricing models across every market the company operated in.
-          </p>
-        </div>
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2018 – 2022</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">Software Designer / AI Lead</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Globant</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            Led the Mexico AI team across computer vision for medical imaging, legal NLP, and anomaly detection. Consulting forces you to diagnose an organization's real constraints before you understand its politics. That habit transfers everywhere.
-          </p>
-        </div>
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2016 – 2018</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">Data Science Manager</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Cultura Colectiva</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            Built the data science and BI team from scratch, shipping content evaluation and generation models years before modern LLM tooling existed. In September 2017 the same team stopped normal operations to build <strong>Verificado19s</strong>, a real-time civic verification platform for the Mexico City earthquake. Under crisis, spreadsheets, deduplication, and human trust beat fancy algorithms. Still the most important week of my career.
-          </p>
-        </div>
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2016</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">Data Science Lead · Data Lab</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Presidency of Mexico · Open Data Initiative</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            Centralized technical team inside the federal government: find the bottleneck, build the analytical pipeline, and ship cloud infrastructure across multiple ministries.
-          </p>
-        </div>
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2015 – 2016</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">Data Scientist / Data Engineer</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Globant · OPI Analytics</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            Discrete mathematical optimization for textile distribution at Globant: tight physical constraints, real money, zero neural nets. At OPI, full-stack startup engineering when Docker was still raw: Ruby, Node, Python, Mongo, Postgres, and cloud ops from nothing to shipped.
-          </p>
-        </div>
-
-        <div class="timeline-entry">
-          <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)] tabular-nums">2010 – 2015</p>
-          <h3 class="mt-1 font-serif text-xl font-semibold">Data Analyst</h3>
-          <p class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">Center for Emergency Attention and Citizen Protection (C4), Mexico City</p>
-          <p class="mt-2 font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
-            First job out of university. Crime prediction models and weekly officer evaluations running through Excel macros and Matlab. The math was the easy part. Designing a dispatch number a commander coming off an eighteen-hour shift could act on at 6:00 AM was the job.
-          </p>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="border-t border-[color:var(--border)] pt-12">
-      <h2 class="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
-        Teaching
-      </h2>
-      <p class="font-mono text-xs text-[color:var(--text-muted)] tabular-nums">ITAM · 2020–2024</p>
-      <ul class="mt-3 space-y-1 font-serif text-base text-[color:var(--text-muted)]">
-        <li>NoSQL for Data Science (M.Sc.)</li>
-        <li>Introduction to Programming for Data Science (M.Sc.)</li>
-        <li>Applied Analysis in Computational Mathematics</li>
-      </ul>
-    </section>
-
-    <section class="mt-12 border-t border-[color:var(--border)] pt-12">
-      <h2 class="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
-        Selected Publications
-      </h2>
-      <ul class="space-y-4">
-        {[
-          {
-            year: '2019',
-            citation: 'Esquinca, Escalante et al. ',
-            title: 'Recomendaciones para Sociedad Civil',
-            venue: 'Google Play Store.',
-          },
-          {
-            year: '2016',
-            citation: 'Martinez, Escalante, Beguerisse-Díaz et al. ',
-            title: 'Understanding Human Behavior in Urban Spaces',
-            venue: 'IJWSR.',
-          },
-          {
-            year: '2013',
-            citation: 'Prieto, Escalante et al. ',
-            title: 'Análisis Criminal y Uso de Cámaras de Seguridad en la CDMX',
-            venue: 'Buenas Prácticas para el Análisis Delictual en América Latina.',
-          },
-        ].map(({ year, citation, title, venue }) => (
-          <li class="grid grid-cols-[3.5rem_1fr] gap-4 font-serif text-base">
-            <span class="font-mono text-xs text-[color:var(--text-muted)] pt-0.5 tabular-nums">{year}</span>
-            <span class="text-[color:var(--text-muted)]">
-              {citation}<em class="text-[color:var(--text)]">{title}</em>. {venue}
-            </span>
+      <ol class="divide-y divide-[color:var(--border)]">
+        {roles.map((role) => (
+          <li class="grid gap-2 py-6 first:pt-0 sm:grid-cols-[9rem_1fr]">
+            <div class="text-sm text-[color:var(--text-muted)] tabular-nums sm:pt-1">{role.period}</div>
+            <div>
+              <h3 class="font-display text-xl font-bold text-[color:var(--text)]">{role.title}</h3>
+              <div class="mt-0.5 font-sans text-sm font-medium text-[color:var(--link)]">{role.org}</div>
+              <p class="mt-2 max-w-[60ch] font-serif text-base leading-relaxed text-[color:var(--text-muted)]" set:html={role.summary} />
+            </div>
           </li>
         ))}
-      </ul>
+      </ol>
     </section>
 
-    <section class="mt-12 border-t border-[color:var(--border)] pt-12">
-      <p class="font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
+    <div class="mt-12 grid gap-12 border-t border-[color:var(--border)] pt-12 md:grid-cols-2">
+      <section aria-labelledby="teaching-title">
+        <h2 id="teaching-title" class="font-display text-2xl font-bold tracking-tight text-[color:var(--text)]">
+          Teaching
+        </h2>
+        <p class="mt-4 text-sm text-[color:var(--text-muted)] tabular-nums">ITAM, 2020–2024</p>
+        <ul class="mt-3 space-y-1 font-serif text-base text-[color:var(--text-muted)]">
+          {courses.map((course) => <li>{course}</li>)}
+        </ul>
+      </section>
+
+      <section aria-labelledby="publications-title">
+        <h2 id="publications-title" class="font-display text-2xl font-bold tracking-tight text-[color:var(--text)]">
+          Selected publications
+        </h2>
+        <ul class="mt-4 space-y-4">
+          {publications.map(({ year, citation, title, venue }) => (
+            <li class="grid grid-cols-[3.5rem_1fr] gap-4 font-serif text-base">
+              <span class="pt-0.5 text-sm text-[color:var(--text-muted)] tabular-nums">{year}</span>
+              <span class="text-[color:var(--text-muted)]">
+                {citation}<em class="text-[color:var(--text)]">{title}</em>. {venue}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <section class="mt-12 max-w-3xl border-t border-[color:var(--border)] pt-12">
+      <p class="max-w-[60ch] font-serif text-base leading-relaxed text-[color:var(--text-muted)]">
         San Salvador now, Mexico City before that. I also run a specialty coffee shop (<strong class="font-medium text-[color:var(--text)]">Aluxe</strong>) and build its operating software (<strong class="font-medium text-[color:var(--text)]">CNTRL</strong>). If you are working on a problem where the model works on paper but the organization or operation is stuck, reach me by <a href="mailto:escalas5@gmail.com">email</a>.
       </p>
     </section>

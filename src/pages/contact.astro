@@ -20,7 +20,7 @@ const mailto = `mailto:${SITE.author.email}?subject=${encodeURIComponent('Hello 
       <p class="font-mono text-xs uppercase tracking-[0.22em] text-[color:var(--text-muted)]">
         CONTACT
       </p>
-      <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-[color:var(--text)] md:text-5xl">
+      <h1 class="mt-4 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-[color:var(--text)] md:text-5xl">
         Direct line.
       </h1>
       <p class="mt-6 font-serif text-xl leading-relaxed text-[color:var(--text-muted)]">
@@ -57,9 +57,9 @@ const mailto = `mailto:${SITE.author.email}?subject=${encodeURIComponent('Hello 
     </section>
 
     <section class="border-t border-[color:var(--border)] pt-12">
-      <p class="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--text-muted)]">
+      <h2 class="mb-6 font-display text-xl font-bold tracking-tight text-[color:var(--text)]">
         Elsewhere
-      </p>
+      </h2>
       <ul class="flex flex-wrap gap-3" role="list">
         {
           SOCIAL_LINKS.map(({ label, href, rel }) => (
@@ -67,7 +67,7 @@ const mailto = `mailto:${SITE.author.email}?subject=${encodeURIComponent('Hello 
               <a
                 href={href}
                 rel={rel}
-                class="inline-flex min-h-11 items-center rounded-full border border-[color:var(--border)] px-4 py-2 font-sans text-sm no-underline text-[color:var(--text-muted)] transition-colors duration-200 hover:border-[color:var(--link)] hover:text-[color:var(--link)] active:scale-[0.97]"
+                class="inline-flex min-h-11 items-center rounded border border-[color:var(--border)] px-4 py-2 font-sans text-sm no-underline text-[color:var(--text-muted)] transition-colors duration-200 hover:border-[color:var(--link)] hover:text-[color:var(--link)] active:scale-[0.97]"
               >
                 {label}
               </a>
@@ -78,7 +78,7 @@ const mailto = `mailto:${SITE.author.email}?subject=${encodeURIComponent('Hello 
     </section>
 
     <section class="mt-12 border-t border-[color:var(--border)] pt-8">
-      <p class="font-mono text-xs uppercase tracking-[0.16em] text-[color:var(--text-muted)]">
+      <p class="text-sm text-[color:var(--text-muted)]">
         {SITE.author.location}
       </p>
     </section>
