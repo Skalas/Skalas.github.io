@@ -5,10 +5,11 @@ export const GET: APIRoute = () => {
   const body = [
     '/* TEAM */',
     `Name: ${SITE.author.name}`,
-    'Role: Data Scientist, Mathematician, Developer',
+    'Role: Mathematician, AI Lead, and Systems Builder',
     `Site: ${SITE.url}`,
-    `Twitter: @${SITE.author.twitter}`,
+    `LinkedIn: https://linkedin.com/in/${SITE.author.linkedin}`,
     `GitHub: @${SITE.author.github}`,
+    `Twitter: @${SITE.author.twitter}`,
     `Location: ${SITE.author.location}`,
     '',
     '/* SITE */',

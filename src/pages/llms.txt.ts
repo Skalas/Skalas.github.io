@@ -16,6 +16,7 @@ export const GET: APIRoute = async () => {
   lines.push(`Role: Mathematician, AI Lead Consultant (Government of El Salvador), Systems Builder`);
   lines.push(`Site: ${SITE.url}`);
   lines.push(`Contact: ${SITE.author.email}`);
+  lines.push(`Full Text Corpus: ${SITE.url}/llms-full.txt`);
   lines.push(`Feed: ${SITE.url}/feed.xml`);
   lines.push(`Sitemap: ${SITE.url}/sitemap-index.xml`);
   lines.push('');
