@@ -7,22 +7,24 @@
   --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  --color-ink-50:  #f8fafc;
-  --color-ink-100: #f1f5f9;
-  --color-ink-200: #e2e8f0;
-  --color-ink-300: #cbd5e1;
-  --color-ink-400: #94a3b8;
-  --color-ink-500: #64748b;
-  --color-ink-600: #475569;
-  --color-ink-700: #334155;
-  --color-ink-800: #1e293b;
-  --color-ink-900: #0f172a;
-  --color-ink-950: #020617;
+  /* Cool mineral silver to achromatic graphite (B >= R, zero warm cream) */
+  --color-ink-50:  #f0f2f4;
+  --color-ink-100: #e6e9ed;
+  --color-ink-200: #d5d9e0;
+  --color-ink-300: #b8bfc9;
+  --color-ink-400: #88919e;
+  --color-ink-500: #5f6773;
+  --color-ink-600: #464c56;
+  --color-ink-700: #30343c;
+  --color-ink-800: #1d2025;
+  --color-ink-900: #131518;
+  --color-ink-950: #0b0c0e;
 
-  --color-accent-400: #60a5fa;
-  --color-accent-500: #3b82f6;
-  --color-accent-600: #2563eb;
-  --color-accent-700: #1d4ed8;
+  /* Mineral spruce / deep Prussian & slate accent (Anti-RGB primary cliché) */
+  --color-accent-400: #7aa2c4;
+  --color-accent-500: #4b7ca6;
+  --color-accent-600: #1e4d78;
+  --color-accent-700: #153858;
 }
 
 @layer base {
@@ -35,7 +37,10 @@
     --border: var(--color-ink-200);
     --link: var(--color-accent-600);
     --link-hover: var(--color-accent-700);
-    --hero-overlay: rgba(15, 23, 42, 0.55);
+    --hero-overlay: rgba(11, 12, 14, 0.58);
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -48,7 +53,7 @@
       --border: var(--color-ink-800);
       --link: var(--color-accent-400);
       --link-hover: var(--color-accent-500);
-      --hero-overlay: rgba(2, 6, 23, 0.65);
+      --hero-overlay: rgba(11, 12, 14, 0.68);
     }
   }
 
@@ -101,18 +106,19 @@
 @layer components {
   .skip-link {
     position: absolute;
-    top: -40px;
     left: 8px;
+    top: 8px;
+    transform: translateY(-200%);
     background: var(--color-accent-600);
     color: white;
     padding: 10px 16px;
-    border-radius: 6px;
+    border-radius: 4px;
     text-decoration: none;
-    z-index: 1000;
-    transition: top 150ms ease-out;
+    z-index: 100;
+    transition: transform 160ms var(--ease-out);
   }
   .skip-link:focus {
-    top: 8px;
+    transform: translateY(0);
   }
 
   .container-prose {
@@ -147,8 +153,8 @@
 
   .fade-up-item {
     opacity: 0;
-    transform: translateY(1.25rem);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateY(1rem);
+    transition: opacity 380ms var(--ease-out), transform 380ms var(--ease-out);
   }
   .fade-up-item.is-visible {
     opacity: 1;
@@ -157,20 +163,22 @@
 
   .category-pill {
     display: inline-block;
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    padding: 0.2rem 0.65rem;
-    border-radius: 9999px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
     border: 1px solid var(--border);
     color: var(--text-muted);
-    transition: border-color 200ms ease-out, color 200ms ease-out;
+    transition: border-color 150ms var(--ease-out), color 150ms var(--ease-out);
   }
-  .group:hover .category-pill {
-    border-color: var(--link);
-    color: var(--link);
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .category-pill {
+      border-color: var(--link);
+      color: var(--link);
+    }
   }
 
   .timeline {
@@ -197,13 +205,15 @@
     top: 0.4rem;
     width: 9px;
     height: 9px;
-    border-radius: 9999px;
-    border: 2px solid var(--link);
+    border-radius: 2px;
+    border: 1.5px solid var(--link);
     background: var(--bg);
-    transition: background-color 200ms ease-out;
+    transition: background-color 150ms var(--ease-out);
   }
-  .timeline-entry:hover::before {
-    background: var(--link);
+  @media (hover: hover) and (pointer: fine) {
+    .timeline-entry:hover::before {
+      background: var(--link);
+    }
   }
 
   .recipes-toolbar {
@@ -217,12 +227,12 @@
     width: 100%;
     min-height: 3.25rem;
     border: 1px solid var(--border);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     background: var(--surface);
     color: var(--text);
     padding: 0.8rem 1rem 0.8rem 3rem;
     font-size: 1rem;
-    transition: border-color 180ms ease-out, box-shadow 180ms ease-out;
+    transition: border-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out);
   }
   .recipe-search::placeholder {
     color: var(--text-muted);
@@ -237,18 +247,24 @@
     min-height: 2.75rem;
     cursor: pointer;
     border: 1px solid var(--border);
-    border-radius: 9999px;
+    border-radius: 4px;
     background: transparent;
     color: var(--text-muted);
     padding: 0.55rem 1rem;
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.06em;
-    transition: border-color 180ms ease-out, background-color 180ms ease-out, color 180ms ease-out;
+    transition: border-color 150ms var(--ease-out), background-color 150ms var(--ease-out), color 150ms var(--ease-out), transform 150ms var(--ease-out);
   }
-  .recipe-filter:hover {
-    border-color: var(--link);
-    color: var(--link);
+  .recipe-filter:active {
+    transform: scale(0.97);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .recipe-filter:hover {
+      border-color: var(--link);
+      color: var(--link);
+    }
   }
   .recipe-filter[aria-pressed="true"] {
     border-color: var(--text);
@@ -264,31 +280,37 @@
   .recipe-card {
     min-width: 0;
     border: 1px solid var(--border);
-    border-radius: 0.9rem;
+    border-radius: 0.5rem;
     background: var(--surface);
     padding: 1.5rem;
-    transition: border-color 220ms ease-out, transform 220ms ease-out, box-shadow 220ms ease-out;
+    transition: border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
   }
-  .recipe-card:hover {
-    border-color: color-mix(in srgb, var(--link) 55%, var(--border));
-    transform: translateY(-2px);
-    box-shadow: 0 14px 36px color-mix(in srgb, var(--color-ink-950) 8%, transparent);
+  .recipe-card:active {
+    transform: scale(0.99);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .recipe-card:hover {
+      border-color: color-mix(in srgb, var(--link) 65%, var(--border));
+      transform: translateY(-2px);
+    }
   }
   .recipe-card[hidden] {
     display: none;
   }
   .recipe-tag {
     border: 1px solid var(--border);
-    border-radius: 9999px;
-    padding: 0.22rem 0.55rem;
+    border-radius: 2px;
+    padding: 0.2rem 0.5rem;
+    font-family: var(--font-mono);
     font-size: 0.65rem;
     line-height: 1.2;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: var(--text-muted);
   }
   .recipe-empty {
     border: 1px dashed var(--border);
-    border-radius: 0.9rem;
+    border-radius: 0.5rem;
     padding: 4rem 1.5rem;
     text-align: center;
   }
@@ -301,7 +323,7 @@
     gap: 1.25rem;
     margin-block: 2.5rem 3rem;
     border: 1px solid var(--border);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     background: var(--surface);
     padding: 1.25rem;
   }
@@ -311,19 +333,25 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 9999px;
+    border-radius: 4px;
     background: var(--text);
     color: var(--bg);
     padding: 0.65rem 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-decoration: none;
-    transition: opacity 180ms ease-out, transform 180ms ease-out;
+    transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out);
   }
-  .origin-link:hover {
-    color: var(--bg);
-    opacity: 0.85;
-    transform: translateY(-1px);
+  .origin-link:active {
+    transform: scale(0.97);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .origin-link:hover {
+      color: var(--bg);
+      opacity: 0.85;
+    }
   }
 
   .recipe-prose {

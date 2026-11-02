@@ -16,3 +16,5 @@ dist
 # Emacs lock / autosave files
 \#*\#
 .\#*
+.write/
+.toltecatl/

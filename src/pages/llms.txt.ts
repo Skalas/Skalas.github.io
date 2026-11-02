@@ -8,11 +8,12 @@ export const GET: APIRoute = async () => {
   );
 
   const lines: string[] = [];
-  lines.push(`# ${SITE.title} — ${SITE.author.name}`);
+  lines.push(`# ${SITE.title} · ${SITE.author.name}`);
   lines.push('');
   lines.push(`> ${SITE.description}`);
   lines.push('');
   lines.push(`Author: ${SITE.author.name}`);
+  lines.push(`Role: Mathematician, AI Lead Consultant (Government of El Salvador), Systems Builder`);
   lines.push(`Site: ${SITE.url}`);
   lines.push(`Contact: ${SITE.author.email}`);
   lines.push(`Feed: ${SITE.url}/feed.xml`);
@@ -20,8 +21,8 @@ export const GET: APIRoute = async () => {
   lines.push('');
   lines.push('## About');
   lines.push('');
-  lines.push(`- [About ${SITE.author.name.split(' ')[0]}](${SITE.url}/about/): Bio and background.`);
-  lines.push(`- [Contact](${SITE.url}/contact/): How to get in touch.`);
+  lines.push(`- [About ${SITE.author.name.split(' ')[0]}](${SITE.url}/about/): Systems built across public-sector AI (DoctorSV), emergency response (Verificado19s, C4 Mexico City), and physical hospitality (CNTRL / Aluxe).`);
+  lines.push(`- [Contact](${SITE.url}/contact/): Direct email and social links.`);
   lines.push('');
   lines.push('## Posts');
   lines.push('');

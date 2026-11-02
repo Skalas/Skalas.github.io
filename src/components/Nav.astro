@@ -11,13 +11,13 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   >
     <a
       href="/"
-      class="font-display text-lg font-semibold tracking-[-0.02em] no-underline"
-      aria-label={`${SITE.title} — home`}
+      class="inline-flex min-h-11 items-center font-display text-lg font-semibold tracking-[-0.02em] no-underline"
+      aria-label={`${SITE.title} · home`}
     >
       {SITE.title}
     </a>
 
-    <ul class="flex items-center gap-3 text-xs sm:gap-6 sm:text-sm">
+    <ul class="flex items-center gap-1 text-xs sm:gap-3 sm:text-sm">
       {
         NAV.map(({ href, label }) => {
           const normalized = href.replace(/\/$/, '') || '/';
@@ -31,7 +31,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
                 href={href}
                 aria-current={isActive ? 'page' : undefined}
                 class:list={[
-                  'no-underline',
+                  'inline-flex min-h-11 items-center px-2.5 no-underline transition-colors duration-150 ease-out active:scale-[0.97]',
                   isActive
                     ? 'font-medium text-[color:var(--text)]'
                     : 'text-[color:var(--text-muted)] hover:text-[color:var(--text)]',

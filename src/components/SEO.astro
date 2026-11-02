@@ -7,7 +7,7 @@ interface Props {
   image?: string;
   imageAlt?: string;
   imageWidth?: number;
-  imageHeight?: number; // omit unless both width and height are known
+  imageHeight?: number;
   type?: 'website' | 'article';
   publishedAt?: Date;
   updatedAt?: Date;
@@ -33,7 +33,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} · ${SITE.title}` : `${SITE.title} — ${SITE.tagline}`;
+const pageTitle = title ? `${title} · ${SITE.title}` : `${SITE.title} · ${SITE.tagline}`;
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
 
 const ogImageSrc = image ?? SITE.defaultOgImage.src;

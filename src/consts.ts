@@ -1,8 +1,8 @@
 export const SITE = {
   title: 'Skalas',
-  tagline: 'Miguel Escalante — Data Scientist, Mathematician, Developer',
+  tagline: 'Miguel Escalante · Mathematician, AI Lead, and Systems Builder',
   description:
-    'Notes on data science, machine learning, engineering, and life in Mexico City — by Miguel Escalante.',
+    'Field notes on production AI, data systems, and career lessons from San Salvador and Mexico City · by Miguel Escalante.',
   url: 'https://skalas.me',
   defaultOgImage: { src: '/og-default.jpg', width: 1900, height: 600 },
   author: {
