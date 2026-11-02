@@ -13,11 +13,11 @@ import Aside from '../../components/Aside.astro';
 
 My bank emails me every time I swipe a card. Amount, merchant, date, all of it, in my inbox before the receipt prints. For years I archived those as noise. They're the only API I need.
 
-Personal finance tools sell you a false choice. Connect your real accounts to a third party — Plaid, Yodlee, whatever your budgeting app runs on — and hand your full transaction history to a SaaS. Or go back to filling a spreadsheet every Sunday night like it's 2005. Automation for your data, or privacy for your weekends.
+Personal finance tools sell you a false choice. Connect your real accounts to a third party (Plaid, Yodlee, whatever your budgeting app runs on) and hand your full transaction history to a SaaS. Or go back to filling a spreadsheet every Sunday night like it's 2005. Automation for your data, or privacy for your weekends.
 
 You don't have to pick. The bank already pushes the data to you, one email per transaction. Parse it locally and the dilemma disappears.
 
-Every piece of what follows is small, only one of them is specific to your bank, and the part I'd steal first isn't the parsing — it's that every judgment call gets compiled into a rule once instead of re-decided every month.
+Every piece of what follows is small, only one of them is specific to your bank, and the part I'd steal first isn't the parsing: it's that every judgment call gets compiled into a rule once instead of re-decided every month.
 
 ## The shape
 
@@ -30,7 +30,7 @@ Two scripts, one database, no daemon:
 [cron] ─────────────────────────────────────────────────→ [SQL reports]
 ```
 
-Each piece does one thing. Nothing runs in the background eating RAM, and no third party ever sees an account of mine — the only network call in the pipeline is my own mail server.
+Each piece does one thing. Nothing runs in the background eating RAM, and no third party ever sees an account of mine. The only network call in the pipeline is my own mail server.
 
 ## The bank is the API
 
@@ -53,7 +53,7 @@ cmd = ["himalaya", "envelope", "list", "--folder", FOLDER,
   A bug I caught in the first week: my own Gmail filters were labelling the bank alerts and pulling them out of the inbox before the script ever ran, so it quietly missed them. Search *All Mail* instead. Nobody else has my filters, but everybody has some.
 </Aside>
 
-It doesn't ask for everything, either. A JSON file next to the script holds one field — when the last run finished — and each pass asks for a week back, or three days before that timestamp when it's more recent. Write it after the commit, never before, and a run that dies just gets covered by the next one. There's no retry logic in this thing. The overlap is the retry logic.
+It doesn't ask for everything, either. A JSON file next to the script holds one field (when the last run finished) and each pass asks for a week back, or three days before that timestamp when it's more recent. Write it after the commit, never before, and a run that dies just gets covered by the next one. There's no retry logic in this thing. The overlap is the retry logic.
 
 ## The table
 
@@ -86,7 +86,7 @@ CREATE INDEX IF NOT EXISTS idx_date_category ON transactions (date, category);
 
 Overlapping windows mean the same email arrives several times. That has to be a non-event.
 
-The message id handles anything that came from the mailbox. Rows you type in by hand don't have one, so they get a second key built from the fields that identify a charge — formatted, because `12.5` and `12.50` are the same charge and two different strings:
+The message id handles anything that came from the mailbox. Rows you type in by hand don't have one, so they get a second key built from the fields that identify a charge, formatted so `12.5` and `12.50` don't become two different strings for the same charge:
 
 ```python
 sig = f"{date}_{time}_{merchant}_{amount:.2f}"
@@ -95,12 +95,12 @@ sig = f"{date}_{time}_{merchant}_{amount:.2f}"
 Keep the time in there. Mine didn't: it signed on date, merchant, and amount alone, which quietly asserts you never buy the same thing at the same place twice in one day. Two identical coffees on a Saturday and the second one was dropped, silently, forever. The transaction that goes missing looks exactly like the duplicate you were trying to kill.
 
 <Aside>
-  That's the reason this post was worth writing. The bug had been running for months and I found it here, on this page, trying to explain the design to someone who couldn't see the code. The time was already parsed and already stored — it just never made it into the signature. Writing it down is a code review you can't argue your way out of.
+  That's the reason this post was worth writing. The bug had been running for months and I found it here, on this page, trying to explain the design to someone who couldn't see the code. The time was already parsed and already stored; it just never made it into the signature. Writing it down is a code review you can't argue your way out of.
 </Aside>
 
 ## Parsing emails that have accents
 
-One bank, one card, five layouts, none of them announced: an HTML table, that table collapsed onto one line, a multi-line block, a key-value list, and a plain sentence — "Compró en X por Y." So the parser is a list of matchers tried in order, first hit wins, and a new format means one more function in the list. Tedious, not hard.
+One bank, one card, five layouts, none of them announced: an HTML table, that table collapsed onto one line, a multi-line block, a key-value list, and a plain sentence ("Compró en X por Y."). So the parser is a list of matchers tried in order, first hit wins, and a new format means one more function in the list. Tedious, not hard.
 
 The character class is the part that bit me. Merchant names here are full of accents and `ñ`, and the reflex pattern truncates them:
 
@@ -109,7 +109,7 @@ The character class is the part that bit me. Merchant names here are full of acc
 re.search(r"Comercio:\s*([A-Za-z0-9 ]+)", text)
 ```
 
-No error. You get "Almac" in your database and a category that's quietly wrong for a month. Spell out the characters your bank actually sends — mine never produces a `ç`, so mine doesn't have one, and you'll find yours the same way I did:
+No error. You get "Almac" in your database and a category that's quietly wrong for a month. Spell out the characters your bank actually sends. Mine never produces a `ç`, so mine doesn't have one, and you'll find yours the same way I did:
 
 ```python
 r"[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ\s\.\*\-\&]"
@@ -127,19 +127,19 @@ Assignment is a regex table loaded from a JSON file:
 { "(?i)PEDIDOSYA\\*RESTOCK": "Groceries" }
 ```
 
-Merchant matches a pattern, row gets the category, done — offline, deterministic, free. Anything that doesn't match lands as `Uncategorized`, which is the point rather than a failure: it's a work queue.
+Merchant matches a pattern, row gets the category, done: offline, deterministic, free. Anything that doesn't match lands as `Uncategorized`, which is the point rather than a failure: it's a work queue.
 
-The model works that queue, not the write path. When it's grown enough to be worth a pass, it groups the uncategorized by merchant, sorts by how much money is sitting in each, and hands me fifteen or twenty with a proposed category apiece. I approve, correct, or skip; approvals become one line each in the rules file. Nothing is written without me saying so — a model that can silently rewrite its own classification rules can quietly reshape a year of history.
+The model works that queue, not the write path. When it's grown enough to be worth a pass, it groups the uncategorized by merchant, sorts by how much money is sitting in each, and hands me fifteen or twenty with a proposed category apiece. I approve, correct, or skip; approvals become one line each in the rules file. Nothing is written without me saying so. A model that can silently rewrite its own classification rules can quietly reshape a year of history.
 
 So it's a suggestion engine for rules, not a classifier. It's wrong often enough that the approval step earns its keep, and once it's right it stays right, which is not something you can say about asking a model the same question every month.
 
-That's also the honest edge of the privacy story: the transactions never leave the disk, but the merchant names I send for review do reach a model — names only, no amounts, no dates, no account. It's the one step here with a drop-in local replacement, and the rules file comes out identical either way.
+That's also the honest edge of the privacy story: the transactions never leave the disk, but the merchant names I send for review do reach a model (names only, no amounts, no dates, no account). It's the one step here with a drop-in local replacement, and the rules file comes out identical either way.
 
-Two things I got wrong writing those rules. The first: match the brand, not the branch. A pattern built around the store you happen to shop at breaks the first time you visit a different location of the same chain, and the transaction silently falls back to `Uncategorized`, so you end up hand-feeding the same merchant forever. The second: on delivery platforms, the last name matters more than the first. Match `Platform\*` and every order collapses into one bucket — groceries, dinner, pharmacy, office supplies, indistinguishable. The real merchant is the sub-store after the asterisk. Anchor the pattern there and the money shows up where it was actually spent.
+Two things I got wrong writing those rules. The first: match the brand, not the branch. A pattern built around the store you happen to shop at breaks the first time you visit a different location of the same chain, and the transaction silently falls back to `Uncategorized`, so you end up hand-feeding the same merchant forever. The second: on delivery platforms, the last name matters more than the first. Match `Platform\*` and every order collapses into one bucket (groceries, dinner, pharmacy, office supplies, indistinguishable). The real merchant is the sub-store after the asterisk. Anchor the pattern there and the money shows up where it was actually spent.
 
 ## Reports are just SQL
 
-This is the payoff for using a real database. A monthly breakdown by category is one query — no pandas, no juggling lists in memory:
+This is the payoff for using a real database. A monthly breakdown by category is one query, with no pandas and no juggling lists in memory:
 
 ```sql
 SELECT category, ROUND(SUM(amount), 2) AS total, COUNT(*) AS n
@@ -153,6 +153,6 @@ cron runs the parser, the parser feeds the database, and the database answers qu
 
 ## Build your own
 
-The bank-specific part is one thing: the regex that reads your bank's email. Most of what's downstream — the Keychain trick, the moving window, the dedup, the reports — travels unchanged. The schema is the exception, because refunds and pending charges and second currencies are all bank-shaped problems that can cost you a column. The rules file is yours alone, but that's data, not code.
+The bank-specific part is one thing: the regex that reads your bank's email. Most of what's downstream (the Keychain trick, the moving window, the dedup, the reports) travels unchanged. The schema is the exception, because refunds and pending charges and second currencies are all bank-shaped problems that can cost you a column. The rules file is yours alone, but that's data, not code.
 
 The order that worked for me: read one of your own alerts and write the parser first, point it at a throwaway `finance.db`, then wire up cron once the numbers look right. Your transaction history is worth more than the convenience you'd trade it for.

@@ -12,7 +12,7 @@ draft: false
 import Aside from '../../components/Aside.astro';
 
 <Aside>
-  This is Part 1 — the jobs I held between 2012 and 2017. <a href="/data-science-journey-part-2">Part 2</a> is the current chapter: what I'm building now, and why it feels different.
+  This is Part 1: the jobs I held between 2012 and 2017. <a href="/data-science-journey-part-2">Part 2</a> is the current chapter: what I'm building now, and why it feels different.
 </Aside>
 
 I should have written this down as I went. I didn't. This is the retrospective version.
@@ -21,52 +21,52 @@ I should have written this down as I went. I didn't. This is the retrospective v
 
 My first "data science" job was at the Mexico City police. I was in my early twenties and my background was theoretical mathematics. The reality of the job was different from what the degree had prepared me for in ways nobody had warned me about.
 
-The data, as it happens, was clean. Somebody had done the reconciliation work before it reached me, and I got lucky. My actual job was the model itself: automating it, tuning parameters, making it produce something useful at the end of a very long pipeline. The model was "inspired by probability" in the way a lot of production models are — it used the math where it helped and stopped caring where it didn't. We weren't chasing mathematical elegance. We were chasing a number a commander could act on.
+The data, as it happens, was clean. Somebody had done the reconciliation work before it reached me, and I got lucky. My actual job was the model itself: automating it, tuning parameters, making it produce something useful at the end of a very long pipeline. The model was "inspired by probability" in the way a lot of production models are: it used the math where it helped and stopped caring where it didn't. We weren't chasing mathematical elegance. We were chasing a number a commander could act on.
 
-Two things I still carry from that year. First, at the data level the pattern was almost sociological: crime moves with people. More foot traffic, more crime. It sounds obvious once you say it out loud; it was not obvious before the model said it for us. Second, the hardest part of the work was not the math or the data. It was presentation — designing something a commander who had been awake for eighteen hours could glance at and decide, _right now_, where to send patrol cars. Every model we shipped had to survive being explained to someone who — rightly — did not care about AUC. The question was always the same: _so what do I tell my people to do tomorrow morning?_
+Two things I still carry from that year. First, at the data level the pattern was almost sociological: crime moves with people. More foot traffic, more crime. It sounds obvious once you say it out loud; it was not obvious before the model said it for us. Second, the hardest part of the work was not the math or the data. It was presentation: designing something a commander who had been awake for eighteen hours could glance at and decide, _right now_, where to send patrol cars. Every model we shipped had to survive being explained to someone who, rightly, did not care about AUC. The question was always the same: _so what do I tell my people to do tomorrow morning?_
 
 That's the job. The algorithm is a fraction of it. The rest, in my case, was chasing errors through a painfully manual process. Data moved through Excel files, into macros somebody had built by recording clicks for a week, into Matlab, back into another Excel macro that printed millions of PDFs. I left that job certain I needed to learn a lot more about the systems underneath the modeling. It turns out that's also the job.
 
 ## OPI Analytics
 
-From the government I went to OPI Analytics. The title said data engineer, but the day-to-day was mostly cloud ops — deployment of complicated services, Docker when Docker was still raw, Ruby on Rails, Node, Express, Python, Mongo, Postgres, and the first real encounters with distributed computing. I did all of this while finishing my master's, which meant a lot of very tired mornings.
+From the government I went to OPI Analytics. The title said data engineer, but the day-to-day was mostly cloud ops: deployment of complicated services, Docker when Docker was still raw, Ruby on Rails, Node, Express, Python, Mongo, Postgres, and the first real encounters with distributed computing. I did all of this while finishing my master's, which meant a lot of very tired mornings.
 
-What OPI gave me was the full picture for the first time — what it actually takes to ship something from nothing. Startup speed, open data, a real community building in public. I could see every piece of the pipeline, not just mine.
+What OPI gave me was the full picture for the first time: what it actually takes to ship something from nothing. Startup speed, open data, a real community building in public. I could see every piece of the pipeline, not just mine.
 
 ## Globant
 
-Consulting at Globant on textile logistics was one of the most interesting problems I've worked on. Tight constraints, real money, nothing solvable with a neural net — the actual tool was discrete optimization. You solve it by understanding the business deeply enough to know which variables are actually levers. It was also the first time I sat next to senior Python engineers who knew what production-grade code looked like, and the first time I flew to San Francisco to argue an edge case with a client in the room.
+Consulting at Globant on textile logistics was one of the most interesting problems I've worked on. Tight constraints, real money, nothing solvable with a neural net: the actual tool was discrete optimization. You solve it by understanding the business deeply enough to know which variables are actually levers. It was also the first time I sat next to senior Python engineers who knew what production-grade code looked like, and the first time I flew to San Francisco to argue an edge case with a client in the room.
 
-Coming from OPI, where I had touched everything, this was the opposite — hyper-specialized on one part of the process, one model, done as well as it could be done. Both are the job. They just look nothing like each other.
+Coming from OPI, where I had touched everything, this was the opposite: hyper-specialized on one part of the process, one model, done as well as it could be done. Both are the job. They just look nothing like each other.
 
 ## Cultura Colectiva, and learning to manage
 
-A college friend who had co-founded the company called asking for profile recommendations for his data science team. The conversation ended with me joining instead. I had wanted to build a team from scratch since OPI — it never happened there — and this was the chance.
+A college friend who had co-founded the company called asking for profile recommendations for his data science team. The conversation ended with me joining instead. I had wanted to build a team from scratch since OPI (it never happened there) and this was the chance.
 
 I led from day one, which in practice meant staying technical while managing. I built out the cloud infrastructure myself while the team grew around it. What managing taught me is that it's less about output and more about two things: how much control you're willing to give up, and whether the people around you are actually developing. Those are the real measures.
 
-Most of the company's BI KPIs ran through my team. On the AI side, we were doing content evaluation and generation before the tools that make that easy now existed — genuinely novel work for the time. I'm proud of what we shipped.
+Most of the company's BI KPIs ran through my team. On the AI side, we were doing content evaluation and generation before the tools that make that easy now existed: genuinely novel work for the time. I'm proud of what we shipped.
 
 The company wanted to scale the team well beyond what I thought the work justified. I argued against it. They made the call. We ended up with more people than we had scoped work for, and we had never designed the value proposition for a team that size. Without that, we were just expensive. The layoff followed.
 
-Building that team cost me a lot personally. It was also the best team I've had. Working with people who are both your friends and technically sharp, who respect the work and follow through — that combination doesn't come around often. It's also what made Verificado19s possible six months later.
+Building that team cost me a lot personally. It was also the best team I've had. Working with people who are both your friends and technically sharp, who respect the work and follow through: that combination doesn't come around often. It's also what made Verificado19s possible six months later.
 
 ## Verificado19s
 
-The clearest payoff of that team came the week nobody was planning for. The 2017 earthquake in Mexico City hit in the middle of a normal workday. We stopped what we were doing and pulled into Verificado19s — a volunteer effort to verify and coordinate information flowing in from the city. For about a week it was every waking hour. People were trying to find family, rescuers needed to know which buildings were still standing, and misinformation was moving faster than help.
+The clearest payoff of that team came the week nobody was planning for. The 2017 earthquake in Mexico City hit in the middle of a normal workday. We stopped what we were doing and pulled into Verificado19s, a volunteer effort to verify and coordinate information flowing in from the city. For about a week it was every waking hour. People were trying to find family, rescuers needed to know which buildings were still standing, and misinformation was moving faster than help.
 
-The technical work was not fancy. It was maps, forms, de-duplication, and a lot of spreadsheets. What made it possible was that the team was already good at working together under pressure — the same habits we'd built shipping NLP to production showed up when we needed to ship a verification pipeline in an afternoon. This is still the thing I am most proud of, and it is not close.
+The technical work was not fancy. It was maps, forms, de-duplication, and a lot of spreadsheets. What made it possible was that the team was already good at working together under pressure: the same habits we'd built shipping NLP to production showed up when we needed to ship a verification pipeline in an afternoon. This is still the thing I am most proud of, and it is not close.
 
-The other thing I learned that week is that the hardest part of building a real-time data product is not the tech — it's trust. People will only send you information if they trust you to use it correctly, and that trust is won in the first ten minutes and lost in the next five. I think about that a lot when I design internal tools now.
+The other thing I learned that week is that the hardest part of building a real-time data product is not the tech: it's trust. People will only send you information if they trust you to use it correctly, and that trust is won in the first ten minutes and lost in the next five. I think about that a lot when I design internal tools now.
 
 ## What I'd tell my 2012 self
 
-**Build the bridge language early.** The technical work is one thing — being able to translate it for the person who has been awake for eighteen hours and needs to decide right now is a different skill entirely. I learned it on the job, slowly. It turns out to be more useful than most technical skills I picked up.
+**Build the bridge language early.** The technical work is one thing; being able to translate it for the person who has been awake for eighteen hours and needs to decide right now is a different skill entirely. I learned it on the job, slowly. It turns out to be more useful than most technical skills I picked up.
 
-**Do both.** Go deep when the problem needs depth. Stay high-level when you're designing or prototyping. Knowing which mode the situation calls for matters more than being good at only one. The OPI vs. Globant contrast never resolved — I still move between them.
+**Do both.** Go deep when the problem needs depth. Stay high-level when you're designing or prototyping. Knowing which mode the situation calls for matters more than being good at only one. The OPI vs. Globant contrast never resolved; I still move between them.
 
 **Let go.** Your team, with the right guidance, can do what twenty of you could do. The moment you stop measuring your impact in things you personally shipped, the job gets bigger. That's the point.
 
-That's the summary of the 2012–2018 run. The last chapter — what I'm doing now, and why working in AI in 2026 feels different from working in "data science" in 2018 — is [Part 2](/data-science-journey-part-2).
+That's the summary of the 2012–2018 run. The last chapter (what I'm doing now, and why working in AI in 2026 feels different from working in "data science" in 2018) is [Part 2](/data-science-journey-part-2).
 
-[Email me](mailto:escalas5@gmail.com) — I'm easier to reach that way than through any form.
+[Email me](mailto:escalas5@gmail.com). I'm easier to reach that way than through any form.

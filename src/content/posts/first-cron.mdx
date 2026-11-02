@@ -8,7 +8,7 @@ hero: ../../assets/heroes/post-bg-02.jpg
 heroAlt: "Clock face abstract"
 ---
 
-If you are working with data, chances are you need to do a certain set of tasks periodically — whether it's your daily report or a daily cleaning of the incoming database, you don't have to waste time running them every day. The procedure I'm about to describe is very rudimentary; there are more complex tools, but in my opinion those tools are overkill for this.
+If you are working with data, chances are you need to do a certain set of tasks periodically. Whether it's your daily report or a daily cleaning of the incoming database, you don't have to waste time running them every day. The procedure I'm about to describe is very rudimentary; there are more complex tools, but in my opinion those tools are overkill for this.
 
 Cron is a tool included in Unix-like operating systems that automatically triggers processes at a given time or interval. It uses jobs that each user installs individually and then runs according to the times set.
 
@@ -17,13 +17,13 @@ I had a question regarding cron:
 - **Q:** If it's automatic then who runs it?
 - **A:** The user that installed the cronjob.
 
-So this is where my first example derives from — to answer the question I made a cronjob that would log the username of the cron "runner" into a file. To install such a cronjob you just have to run:
+So this is where my first example derives from: to answer the question I made a cronjob that would log the username of the cron "runner" into a file. To install such a cronjob you just have to run:
 
 ```bash
 crontab -e
 ```
 
-The first time it might ask what text editor you want to use — nano is usually the simplest choice. You'll then be prompted with the chosen editor and the following text by default:
+The first time it might ask what text editor you want to use; nano is usually the simplest choice. You'll then be prompted with the chosen editor and the following text by default:
 
 ```text
 # Edit this file to introduce tasks to be run by cron.
@@ -43,7 +43,7 @@ The first time it might ask what text editor you want to use — nano is usually
 # m h  dom mon dow   command
 ```
 
-The whole file right now is just comments — nothing actionable yet, but a useful intro on how to use cron. To install a cron we just add a new line; the line has five time slots: minute, hour, day of month, month, and day of week.
+The whole file right now is just comments: nothing actionable yet, but a useful intro on how to use cron. To install a cron we just add a new line; the line has five time slots: minute, hour, day of month, month, and day of week.
 
 The following line adds a cron that will run every minute. It's a simple command that outputs the username (`whoami`) to `/tmp/weeeee.log`:
 
