@@ -7,7 +7,7 @@ export const SITE = {
   defaultOgImage: { src: '/og-default.jpg', width: 1900, height: 600 },
   author: {
     name: 'Miguel Escalante',
-    email: 'escalas5@gmail.com',
+    email: 'contact@skalas.me',
     location: 'San Salvador, El Salvador',
     twitter: 'Skalas',
     github: 'Skalas',
